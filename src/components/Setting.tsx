@@ -1,22 +1,31 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { WebSQLDatabase } from "expo-sqlite";
 import React, { useState } from "react";
 import { Button, View } from "react-native";
 
 import { RootStackParamList } from "../../App";
 import { DatePicker } from "./DatePicker";
 
-type Props = NativeStackScreenProps<RootStackParamList, "Setting">;
-
+interface Props extends NativeStackScreenProps<RootStackParamList, "Setting"> {
+  db: WebSQLDatabase;
+}
 export const Setting = (props: Props) => {
-  const { navigation } = props;
+  const { navigation, db } = props;
 
   const [date, setDate] = useState(new Date());
 
   const confirm = () => {
-    console.log("Log");
-    // TODO save locally
-
-    navigation.navigate("Home");
+    db.transaction(
+      (tx) => {
+        tx.executeSql("insert into items (date) values (?)", [
+          date.toISOString(),
+        ]);
+      },
+      () => {
+        console.log("success");
+        navigation.navigate("Main");
+      }
+    );
   };
 
   return (

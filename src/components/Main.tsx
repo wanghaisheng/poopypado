@@ -1,13 +1,41 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React from "react";
+import { WebSQLDatabase } from "expo-sqlite";
+import React, { useEffect, useState } from "react";
 import { Button, Text, View } from "react-native";
 
 import { RootStackParamList } from "../../App";
 
-type Props = NativeStackScreenProps<RootStackParamList, "Home">;
+interface Props extends NativeStackScreenProps<RootStackParamList, "Main"> {
+  db: WebSQLDatabase;
+}
+
+interface History {
+  id: number;
+  date: Date;
+}
 
 export const Main = (props: Props) => {
-  const { navigation } = props;
+  const { navigation, db } = props;
+
+  const [history, setHistory] = useState<History[]>([]);
+
+  // Get history
+  useEffect(() => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        `SELECT * FROM items ORDER BY date(date) DESC;`,
+        [],
+        (_, { rows }) => {
+          setHistory(
+            (rows as any)._array.map((a: any) => ({
+              id: a.id,
+              date: new Date(a.date),
+            }))
+          );
+        }
+      );
+    });
+  }, []);
 
   const add = () => {
     navigation.navigate("Setting");
@@ -15,7 +43,9 @@ export const Main = (props: Props) => {
 
   return (
     <View>
-      <Text>Yo</Text>
+      {history.map((h) => (
+        <Text key={h.id}>{h.date.toISOString()}</Text>
+      ))}
       <Button onPress={add} title="Track" />
     </View>
   );

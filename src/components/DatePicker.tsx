@@ -39,7 +39,7 @@ export const DatePicker = (props: Props) => {
         <Button onPress={showDatepicker} title={format(date, "yyyy MM dd")} />
       </View>
       <View>
-        <Button onPress={showTimepicker} title={format(date, "hh:mm")} />
+        <Button onPress={showTimepicker} title={format(date, "HH:mm")} />
       </View>
       {show && (
         <DateTimePicker value={date} mode={mode} is24Hour onChange={onUpdate} />
