@@ -2,10 +2,12 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { WebSQLDatabase } from "expo-sqlite";
 import React, { useEffect, useState } from "react";
 import { Button, Text, View } from "react-native";
+import styled from "styled-components/native";
 
 import { RootStackParamList } from "../../App";
 import { Calendar } from "./Calendar";
 import { Poop } from "./history";
+import { NewEntry } from "./NewEntry";
 
 interface Props extends NativeStackScreenProps<RootStackParamList, "Main"> {
   db: WebSQLDatabase;
@@ -34,14 +36,25 @@ export const Main = (props: Props) => {
     });
   }, []);
 
-  const add = () => {
+  const goToSettingPage = () => {
     navigation.navigate("Setting");
   };
 
   return (
-    <View>
-      <Calendar history={history} />
-      <Button onPress={add} title="Track" />
-    </View>
+    <Container>
+      <CalendarContainer>
+        <Calendar history={history} />
+      </CalendarContainer>
+      <NewEntry onNewEntryPress={goToSettingPage} />
+    </Container>
   );
 };
+
+const Container = styled.View`
+  height: 100%;
+  display: flex;
+`;
+
+const CalendarContainer = styled.View`
+  flex: 1;
+`;
