@@ -14,7 +14,7 @@ export const Calendar = (props: Props) => {
 
   const counts = historyToCounts(history);
   const currentMonth = new Date().getMonth() + 1;
-
+  const currentYear = new Date().getFullYear();
   return (
     <CalendarList
       dayComponent={({ date }) => {
@@ -24,7 +24,11 @@ export const Calendar = (props: Props) => {
             <DayLabelContainer>
               <DayLabel>{date.day}</DayLabel>
             </DayLabelContainer>
-            <CountContainer thisMonth={date.month === currentMonth}>
+            <CountContainer
+              thisMonth={
+                date.month === currentMonth && date.year === currentYear
+              }
+            >
               <Count>{count > 0 ? count : ""}</Count>
             </CountContainer>
           </DayContainer>
