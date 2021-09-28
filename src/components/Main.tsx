@@ -4,20 +4,17 @@ import React, { useEffect, useState } from "react";
 import { Button, Text, View } from "react-native";
 
 import { RootStackParamList } from "../../App";
+import { Calendar } from "./Calendar";
+import { Poop } from "./history";
 
 interface Props extends NativeStackScreenProps<RootStackParamList, "Main"> {
   db: WebSQLDatabase;
 }
 
-interface History {
-  id: number;
-  date: Date;
-}
-
 export const Main = (props: Props) => {
   const { navigation, db } = props;
 
-  const [history, setHistory] = useState<History[]>([]);
+  const [history, setHistory] = useState<Poop[]>([]);
 
   // Get history
   useEffect(() => {
@@ -43,9 +40,7 @@ export const Main = (props: Props) => {
 
   return (
     <View>
-      {history.map((h) => (
-        <Text key={h.id}>{h.date.toISOString()}</Text>
-      ))}
+      <Calendar history={history} />
       <Button onPress={add} title="Track" />
     </View>
   );
