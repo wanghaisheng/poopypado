@@ -6,8 +6,10 @@ import styled from "styled-components/native";
 
 import { RootStackParamList } from "../../App";
 import { Calendar } from "./Calendar";
+import { Card } from "./Card";
 import { Poop } from "./history";
 import { NewEntry } from "./NewEntry";
+import { Page } from "./Page";
 
 interface Props extends NativeStackScreenProps<RootStackParamList, "Main"> {
   db: WebSQLDatabase;
@@ -41,20 +43,17 @@ export const Main = (props: Props) => {
   };
 
   return (
-    <Container>
+    <Page>
       <CalendarContainer>
         <Calendar history={history} />
       </CalendarContainer>
       <NewEntry onNewEntryPress={goToSettingPage} />
-    </Container>
+    </Page>
   );
 };
 
-const Container = styled.View`
-  height: 100%;
-  display: flex;
-`;
-
-const CalendarContainer = styled.View`
+const CalendarContainer = styled(Card)`
   flex: 1;
+  padding: 0;
+  overflow: hidden;
 `;

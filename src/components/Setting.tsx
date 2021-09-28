@@ -5,6 +5,8 @@ import { Button, View } from "react-native";
 
 import { RootStackParamList } from "../../App";
 import { DatePicker } from "./DatePicker";
+import { Page } from "./Page";
+import { PillButton } from "./PillButton";
 
 interface Props extends NativeStackScreenProps<RootStackParamList, "Setting"> {
   db: WebSQLDatabase;
@@ -29,9 +31,9 @@ export const Setting = (props: Props) => {
   };
 
   return (
-    <View>
+    <Page>
       <DatePicker date={date} onChange={(d) => setDate(d)} />
-      <Button onPress={confirm} title="Log" />
-    </View>
+      <PillButton onPress={confirm}>Create Entry</PillButton>
+    </Page>
   );
 };

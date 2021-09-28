@@ -1,7 +1,10 @@
 import DateTimePicker from "@react-native-community/datetimepicker";
 import format from "date-fns/format";
 import React, { useState } from "react";
-import { Button, Platform, View } from "react-native";
+import { Button, Platform, Text, TouchableOpacity, View } from "react-native";
+import styled from "styled-components/native";
+
+import { Card } from "./Card";
 
 interface Props {
   date: Date;
@@ -34,16 +37,34 @@ export const DatePicker = (props: Props) => {
   };
 
   return (
-    <View>
-      <View>
-        <Button onPress={showDatepicker} title={format(date, "yyyy MM dd")} />
-      </View>
-      <View>
-        <Button onPress={showTimepicker} title={format(date, "HH:mm")} />
-      </View>
+    <Card>
+      <Text>Select a Time</Text>
+      <DateTimeContainer>
+        <View>
+          <TouchableOpacity onPress={showTimepicker}>
+            <DateTimeText>{format(date, "HH:mm a")}</DateTimeText>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity onPress={showDatepicker}>
+            <DateTimeText>{format(date, "yyyy MMM dd")}</DateTimeText>
+          </TouchableOpacity>
+        </View>
+      </DateTimeContainer>
       {show && (
         <DateTimePicker value={date} mode={mode} is24Hour onChange={onUpdate} />
       )}
-    </View>
+    </Card>
   );
 };
+
+const DateTimeText = styled.Text`
+  font-size: 28px;
+`;
+
+const DateTimeContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+`;
