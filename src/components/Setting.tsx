@@ -1,9 +1,9 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { WebSQLDatabase } from "expo-sqlite";
 import React, { useState } from "react";
-import { Button, View } from "react-native";
 
 import { RootStackParamList } from "../../App";
+import { AmountSlider } from "./AmountSlider";
 import { DatePicker } from "./DatePicker";
 import { Page } from "./Page";
 import { PillButton } from "./PillButton";
@@ -15,6 +15,8 @@ export const Setting = (props: Props) => {
   const { navigation, db } = props;
 
   const [date, setDate] = useState(new Date());
+
+  const [amount, setAmount] = useState(3);
 
   const confirm = () => {
     db.transaction(
@@ -33,6 +35,7 @@ export const Setting = (props: Props) => {
   return (
     <Page>
       <DatePicker date={date} onChange={(d) => setDate(d)} />
+      <AmountSlider amount={amount} setAmount={setAmount} />
       <PillButton onPress={confirm}>Create Entry</PillButton>
     </Page>
   );
