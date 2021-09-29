@@ -8,13 +8,15 @@ import { theme } from "./theme";
 export const TypeSelect = () => {
   return (
     <Card>
-      <Text>Select an Amount</Text>
+      <Content>
+        <Text>Select Type(s)</Text>
+      </Content>
     </Card>
   );
 };
 
-const Labels = styled.View`
+const Content = styled.View`
   display: flex;
-  flex-direction: row;
+  flex-direction: Colomn;
   justify-content: space-between;
 `;

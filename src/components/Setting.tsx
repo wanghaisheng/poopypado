@@ -8,6 +8,7 @@ import { DatePicker } from "./DatePicker";
 import { Note } from "./Note";
 import { Page } from "./Page";
 import { PillButton } from "./PillButton";
+import { TypeSelect } from "./TypeSelect";
 
 interface Props extends NativeStackScreenProps<RootStackParamList, "Setting"> {
   db: WebSQLDatabase;
@@ -37,8 +38,10 @@ export const Setting = (props: Props) => {
   return (
     <Page>
       <DatePicker date={date} onChange={(d) => setDate(d)} />
+      <TypeSelect />
       <AmountSlider amount={amount} setAmount={setAmount} />
       <Note value={note} setValue={setNote} />
+
       <PillButton onPress={confirm}>Create Entry</PillButton>
     </Page>
   );
