@@ -62,7 +62,7 @@ const CountContainer = styled.View<{ thisMonth: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 20px;
+  border-radius: 50px;
   background: ${(p) => (p.thisMonth ? p.theme.color.main : "grey")};
   margin-top: 14px;
 `;
