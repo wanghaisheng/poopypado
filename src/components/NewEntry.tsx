@@ -14,7 +14,7 @@ export const NewEntry = (props: Props) => {
   return (
     <Card>
       <Text>Hint: Click on a date for more information</Text>
-      <PillButton onPress={onNewEntryPress}>New Entry</PillButton>
+      <PillButton onPress={onNewEntryPress}>New Poop</PillButton>
     </Card>
   );
 };
