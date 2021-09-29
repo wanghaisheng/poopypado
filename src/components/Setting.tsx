@@ -42,10 +42,12 @@ export const Setting = (props: Props) => {
   React.useEffect(
     () =>
       navigation.addListener("beforeRemove", (e) => {
-        e.preventDefault();
-        setShowConfirmModal(true);
+        if (!showConfirmModal) {
+          e.preventDefault();
+          setShowConfirmModal(true);
+        }
       }),
-    [navigation]
+    [navigation, showConfirmModal]
   );
 
   const confirm = () => {
@@ -70,7 +72,7 @@ export const Setting = (props: Props) => {
       <PillButton onPress={confirm}>Create Entry</PillButton>
       <ConfirmationModal
         visible={showConfirmModal}
-        onConfirm={() => navigation.goBack()}
+        onConfirm={() => navigation.navigate("Main")}
         onCancel={() => setShowConfirmModal(false)}
       />
     </Page>
