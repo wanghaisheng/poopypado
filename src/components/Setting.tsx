@@ -38,6 +38,16 @@ export const Setting = (props: Props) => {
     });
   }, []);
 
+  // Prevent default behavior of leaving the screen
+  React.useEffect(
+    () =>
+      navigation.addListener("beforeRemove", (e) => {
+        e.preventDefault();
+        setShowConfirmModal(true);
+      }),
+    [navigation]
+  );
+
   const confirm = () => {
     db.transaction(
       (tx) => {
