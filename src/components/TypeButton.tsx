@@ -12,7 +12,6 @@ interface Props {
 
 export const TypeButton: FC<Props> = (props) => {
   const { onPress, title, description, selected } = props;
-  console.log(selected);
   return (
     <TouchableOpacity onPress={onPress}>
       <Container selected={selected}>
@@ -31,18 +30,20 @@ export const TypeButton: FC<Props> = (props) => {
 };
 
 const Container = styled.View<{ selected: boolean }>`
-  background:${(p) => (p.selected ? "red" : "white")}
-  height: 68px;
+  background:${(p) =>
+    p.selected ? p.theme.color.background : p.theme.color.foreground}
+  height: 73px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 4px 8px 10px 4px;
+  
 `;
 
 const TypePicture = styled.View`
   background: grey;
-  width: 65px;
+  width: 65px;s
   height: 60px;
-  margin-top: 2px;
 `;
 
 const TextContainer = styled.View`
@@ -56,5 +57,5 @@ const TypeName = styled.Text`
 
 const TypeDescription = styled.Text`
   color: #4e4e55;
-  font-size: 16px;
+  font-size: 14px;
 `;
