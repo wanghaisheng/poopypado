@@ -42,7 +42,7 @@ const Container = styled.View<{ selected: boolean }>`
 
 const TypePicture = styled.View`
   background: grey;
-  width: 65px;s
+  width: 65px;
   height: 60px;
 `;
 
