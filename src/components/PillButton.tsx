@@ -21,7 +21,7 @@ export const PillButton: FC<Props> = (props) => {
 const Container = styled.View`
   background: ${(p) => p.theme.color.main};
   padding: 12px 36px;
-  border-radius: 50;
+  border-radius: 50px;
   align-self: center;
 `;
 

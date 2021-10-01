@@ -6,38 +6,42 @@ import { Card } from "./Card";
 import { TypeButton } from "./TypeButton";
 
 interface Props {
-  type: number[];
-  onTypeSelect: (type: number[]) => void;
+  type: boolean[];
+  onTypeSelect: (type: boolean[]) => void;
 }
 
 export const TypeSelect = (props: Props) => {
   const { onTypeSelect, type } = props;
 
-  const typeInfo = [
-    { heading: "Type 1", description: "Small, hard and difficult to pass" },
-    { heading: "Type  2", description: "Sausage-shaped but lumpy" },
-    { heading: "Type  3", description: "Sausage-shaped but cracked" },
-    { heading: "Type  4", description: "Sausage-shaped, smooth and soft" },
-    { heading: "Type  5", description: "Small and soft with defined edges" },
+  const typeInfoArr = [
+    { title: "Type 1", description: "Small, hard and difficult to pass" },
+    { title: "Type  2", description: "Sausage-shaped but lumpy" },
+    { title: "Type  3", description: "Sausage-shaped but cracked" },
+    { title: "Type  4", description: "Sausage-shaped, smooth and soft" },
+    { title: "Type  5", description: "Small and soft with defined edges" },
     {
-      heading: "Type  6",
+      title: "Type  6",
       description: "Very small, fluffy/mushy pieces with ragged edges",
     },
-    { heading: "Type  7", description: "watery with no solid pieces" },
+    { title: "Type  7", description: "watery with no solid pieces" },
   ];
 
   return (
     <Card>
       <Content>
         <Text>Select Type(s)</Text>
-        {typeInfo.map((value, index) => (
+        {typeInfoArr.map((typeInfo, index) => (
           <TypeButton
-            selected={type.includes(index)}
+            selected={type[index]}
             onPress={() => {
-              const newType = [...type, index];
+              const newType = [...type];
+              newType[index]
+                ? (newType[index] = false)
+                : (newType[index] = true);
               onTypeSelect(newType);
             }}
-            {...value}
+            {...typeInfo}
+            key={index}
           />
         ))}
       </Content>

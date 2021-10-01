@@ -21,7 +21,15 @@ export const Setting = (props: Props) => {
   const [amount, setAmount] = useState(3);
   const [note, setNote] = useState("");
 
-  const [type, setType] = useState([3]);
+  const [type, setType] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
 
   const confirm = () => {
     db.transaction(
