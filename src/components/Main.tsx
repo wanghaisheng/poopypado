@@ -1,4 +1,5 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { format } from "date-fns";
 import { WebSQLDatabase } from "expo-sqlite";
 import React, { useEffect, useState } from "react";
 import { Button, Text, View } from "react-native";
@@ -38,6 +39,13 @@ export const Main = (props: Props) => {
     });
   }, []);
 
+  // set title to current month
+  const [visibleDate, setVisibleDate] = useState(new Date());
+
+  useEffect(() => {
+    navigation.setOptions({ title: format(visibleDate, "MMMM yyyy") });
+  }, [visibleDate]);
+
   const goToSettingPage = () => {
     navigation.navigate("Setting");
   };
@@ -45,7 +53,7 @@ export const Main = (props: Props) => {
   return (
     <Page>
       <CalendarContainer>
-        <Calendar history={history} />
+        <Calendar history={history} onVisibleMonthChange={setVisibleDate} />
       </CalendarContainer>
       <NewEntry onNewEntryPress={goToSettingPage} />
     </Page>

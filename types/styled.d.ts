@@ -6,6 +6,7 @@ declare module "styled-components" {
       main: string;
       foreground: string;
       background: string;
+      icon: string;
     };
   }
 }

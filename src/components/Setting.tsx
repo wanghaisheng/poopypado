@@ -1,9 +1,11 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { WebSQLDatabase } from "expo-sqlite";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
 
 import { RootStackParamList } from "../../App";
 import { AmountSlider } from "./AmountSlider";
+import { ConfirmationModal } from "./ConfirmationModal";
 import { DatePicker } from "./DatePicker";
 import { Note } from "./Note";
 import { Page } from "./Page";
@@ -30,6 +32,33 @@ export const Setting = (props: Props) => {
     false,
     false,
   ]);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  useEffect(() => {
+    navigation.setOptions({
+      headerBackVisible: false,
+      headerRight: () => {
+        return (
+          <TouchableOpacity onPress={() => setShowConfirmModal(true)}>
+            <View>
+              <Text>X</Text>
+            </View>
+          </TouchableOpacity>
+        );
+      },
+    });
+  }, []);
+
+  // Prevent default behavior of leaving the screen
+  React.useEffect(
+    () =>
+      navigation.addListener("beforeRemove", (e) => {
+        if (!showConfirmModal) {
+          e.preventDefault();
+          setShowConfirmModal(true);
+        }
+      }),
+    [navigation, showConfirmModal]
+  );
 
   const confirm = () => {
     db.transaction(
@@ -53,6 +82,11 @@ export const Setting = (props: Props) => {
       <Note value={note} setValue={setNote} />
 
       <PillButton onPress={confirm}>Create Entry</PillButton>
+      <ConfirmationModal
+        visible={showConfirmModal}
+        onConfirm={() => navigation.navigate("Main")}
+        onCancel={() => setShowConfirmModal(false)}
+      />
     </Page>
   );
 };

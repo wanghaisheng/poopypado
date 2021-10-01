@@ -7,16 +7,21 @@ import { Poop } from "./history";
 
 interface Props {
   history: Poop[];
+  onVisibleMonthChange: (date: Date) => void;
 }
 
 export const Calendar = (props: Props) => {
-  const { history } = props;
+  const { history, onVisibleMonthChange } = props;
 
   const counts = historyToCounts(history);
   const currentMonth = new Date().getMonth() + 1;
   const currentYear = new Date().getFullYear();
+
   return (
     <CalendarList
+      onVisibleMonthsChange={(months) => {
+        onVisibleMonthChange(new Date(months[0].dateString));
+      }}
       dayComponent={({ date }) => {
         const count = counts[date.dateString];
         return (
