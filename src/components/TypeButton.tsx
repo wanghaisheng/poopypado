@@ -6,19 +6,19 @@ import { Text } from "react-native";
 interface Props {
   onPress: () => void;
   selected: boolean;
-  type: string;
+  heading: string;
   description: string;
 }
 
 export const TypeButton: FC<Props> = (props) => {
-  const { onPress, type, description, selected } = props;
+  const { onPress, heading, description, selected } = props;
 
   return (
     <TouchableOpacity onPress={onPress}>
       <Container selected={selected}>
         <TextContainer>
           <TypeName>
-            <Text>{type}</Text>
+            <Text>{heading}</Text>
           </TypeName>
           <TypeDescription>
             <Text>{description}</Text>

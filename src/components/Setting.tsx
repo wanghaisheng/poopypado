@@ -21,6 +21,8 @@ export const Setting = (props: Props) => {
   const [amount, setAmount] = useState(3);
   const [note, setNote] = useState("");
 
+  const [type, setType] = useState([3]);
+
   const confirm = () => {
     db.transaction(
       (tx) => {
@@ -38,7 +40,7 @@ export const Setting = (props: Props) => {
   return (
     <Page>
       <DatePicker date={date} onChange={(d) => setDate(d)} />
-      <TypeSelect />
+      <TypeSelect type={type} onTypeSelect={setType} />
       <AmountSlider amount={amount} setAmount={setAmount} />
       <Note value={note} setValue={setNote} />
 

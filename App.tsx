@@ -30,7 +30,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Main">
+        <Stack.Navigator initialRouteName="Setting">
           <Stack.Screen name="Main">
             {(props) => <Main {...props} db={db} />}
           </Stack.Screen>
