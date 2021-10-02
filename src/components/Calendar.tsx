@@ -1,9 +1,11 @@
 import format from "date-fns/format";
-import React from "react";
+import React, { useState } from "react";
+import { Modal, Pressable } from "react-native";
 import { CalendarList } from "react-native-calendars";
 import styled from "styled-components/native";
 
-import { Poop } from "./history";
+import { Poop, historyDateHash } from "./history";
+import { PoopList } from "./PoopList";
 
 interface Props {
   history: Poop[];
@@ -17,33 +19,58 @@ export const Calendar = (props: Props) => {
   const currentMonth = new Date().getMonth() + 1;
   const currentYear = new Date().getFullYear();
 
+  const [selectedDateHistory, setSelectedDateHistory] = useState<Poop[] | null>(
+    null
+  );
+  const dateHash = historyDateHash(history);
+
   return (
-    <CalendarList
-      onVisibleMonthsChange={(months) => {
-        onVisibleMonthChange(new Date(months[0].dateString));
-      }}
-      dayComponent={({ date }) => {
-        const count = counts[date.dateString];
-        return (
-          <DayContainer>
-            <DayLabelContainer>
-              <DayLabel>{date.day}</DayLabel>
-            </DayLabelContainer>
-            <CountContainer
-              thisMonth={
-                date.month === currentMonth && date.year === currentYear
-              }
+    <>
+      <CalendarList
+        onVisibleMonthsChange={(months) => {
+          onVisibleMonthChange(new Date(months[0].dateString));
+        }}
+        dayComponent={({ date }) => {
+          const count = counts[date.dateString];
+          return (
+            <Pressable
+              onPress={() => {
+                setSelectedDateHistory(dateHash[date.dateString] ?? null);
+              }}
             >
-              <Count>{count > 0 ? count : ""}</Count>
-            </CountContainer>
-          </DayContainer>
-        );
-      }}
-      futureScrollRange={3}
-      scrollEnabled
-      showScrollIndicator
-      firstDay={1}
-    />
+              <DayContainer>
+                <DayLabelContainer>
+                  <DayLabel>{date.day}</DayLabel>
+                </DayLabelContainer>
+                <CountContainer
+                  thisMonth={
+                    date.month === currentMonth && date.year === currentYear
+                  }
+                >
+                  <Count>{count > 0 ? count : ""}</Count>
+                </CountContainer>
+              </DayContainer>
+            </Pressable>
+          );
+        }}
+        futureScrollRange={3}
+        scrollEnabled
+        showScrollIndicator
+        firstDay={1}
+      />
+      {selectedDateHistory && (
+        <Modal transparent>
+          <EntryModalContainer>
+            <PoopList
+              history={selectedDateHistory}
+              onClose={() => {
+                setSelectedDateHistory(null);
+              }}
+            />
+          </EntryModalContainer>
+        </Modal>
+      )}
+    </>
   );
 };
 
@@ -74,6 +101,12 @@ const CountContainer = styled.View<{ thisMonth: boolean }>`
 
 const Count = styled.Text`
   color: white;
+`;
+
+const EntryModalContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  padding: 12px;
 `;
 
 /**
