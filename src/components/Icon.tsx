@@ -3,6 +3,11 @@ import React from "react";
 import { Pressable, Text } from "react-native";
 
 interface Props {
+  /**
+   * Use `FontAwesome5` icons from the following link
+   *
+   * @see https://icons.expo.fyi/
+   */
   name: string;
   onPress?: () => void;
 }
