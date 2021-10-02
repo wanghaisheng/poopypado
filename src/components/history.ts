@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { WebSQLDatabase } from "expo-sqlite";
 
 export interface Poop {
   id: number;
@@ -22,4 +23,18 @@ export const historyDateHash = (history: Poop[]): DateHash => {
     }
   });
   return hash;
+};
+
+export const deleteEntry = (
+  db: WebSQLDatabase,
+  id: string,
+  onComplete: () => void
+): void => {
+  db.transaction(
+    (tx) => {
+      tx.executeSql(`delete from items where id = ?;`, [id]);
+    },
+    undefined,
+    onComplete
+  );
 };

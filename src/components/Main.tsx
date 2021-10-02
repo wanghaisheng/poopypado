@@ -2,13 +2,12 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { format } from "date-fns";
 import { WebSQLDatabase } from "expo-sqlite";
 import React, { useEffect, useState } from "react";
-import { Button, Text, View } from "react-native";
 import styled from "styled-components/native";
 
 import { RootStackParamList } from "../../App";
 import { Calendar } from "./Calendar";
 import { Card } from "./Card";
-import { Poop } from "./history";
+import { Poop, deleteEntry } from "./history";
 import { NewEntry } from "./NewEntry";
 import { Page } from "./Page";
 
@@ -53,7 +52,16 @@ export const Main = (props: Props) => {
   return (
     <Page>
       <CalendarContainer>
-        <Calendar history={history} onVisibleMonthChange={setVisibleDate} />
+        <Calendar
+          history={history}
+          onVisibleMonthChange={setVisibleDate}
+          onDelete={(id) => {
+            deleteEntry(db, id, () => {
+              const newHistory = history.filter((h) => h.id.toString() !== id);
+              setHistory(newHistory);
+            });
+          }}
+        />
       </CalendarContainer>
       <NewEntry onNewEntryPress={goToSettingPage} />
     </Page>

@@ -68,7 +68,6 @@ export const Setting = (props: Props) => {
         ]);
       },
       () => {
-        console.log("success");
         navigation.navigate("Main");
       }
     );
