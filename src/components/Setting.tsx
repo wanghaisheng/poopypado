@@ -1,7 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { WebSQLDatabase } from "expo-sqlite";
 import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 import { RootStackParamList } from "../../App";
 import { AmountSlider } from "./AmountSlider";
@@ -76,17 +76,19 @@ export const Setting = (props: Props) => {
 
   return (
     <Page>
-      <DatePicker date={date} onChange={(d) => setDate(d)} />
-      <TypeSelect type={type} onTypeSelect={setType} />
-      <AmountSlider amount={amount} setAmount={setAmount} />
-      <Note value={note} setValue={setNote} />
+      <ScrollView>
+        <DatePicker date={date} onChange={(d) => setDate(d)} />
+        <TypeSelect type={type} onTypeSelect={setType} />
+        <AmountSlider amount={amount} setAmount={setAmount} />
+        <Note value={note} setValue={setNote} />
 
+        <ConfirmationModal
+          visible={showConfirmModal}
+          onConfirm={() => navigation.navigate("Main")}
+          onCancel={() => setShowConfirmModal(false)}
+        />
+      </ScrollView>
       <PillButton onPress={confirm}>Create Entry</PillButton>
-      <ConfirmationModal
-        visible={showConfirmModal}
-        onConfirm={() => navigation.navigate("Main")}
-        onCancel={() => setShowConfirmModal(false)}
-      />
     </Page>
   );
 };
