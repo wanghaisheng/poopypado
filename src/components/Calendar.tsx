@@ -10,11 +10,12 @@ import { PoopList } from "./PoopList";
 interface Props {
   history: Poop[];
   onVisibleMonthChange: (date: Date) => void;
+  onEdit: (entry: Poop) => void;
   onDelete: (id: string) => void;
 }
 
 export const Calendar = (props: Props) => {
-  const { history, onVisibleMonthChange, onDelete } = props;
+  const { history, onVisibleMonthChange, onEdit, onDelete } = props;
 
   const counts = historyToCounts(history);
   const currentMonth = new Date().getMonth() + 1;
@@ -67,6 +68,7 @@ export const Calendar = (props: Props) => {
               onClose={() => {
                 setSelectedDateHistory(null);
               }}
+              onEdit={onEdit}
               onDelete={(id) => {
                 onDelete(id);
                 setSelectedDateHistory(null);

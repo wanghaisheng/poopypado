@@ -7,7 +7,7 @@ import { RootStackParamList } from "../../App";
 import { AmountSlider } from "./AmountSlider";
 import { ConfirmationModal } from "./ConfirmationModal";
 import { DatePicker } from "./DatePicker";
-import { addEntry } from "./history";
+import { addEntry, editEntry } from "./history";
 import { Note } from "./Note";
 import { Page } from "./Page";
 import { PillButton } from "./PillButton";
@@ -17,14 +17,15 @@ interface Props extends NativeStackScreenProps<RootStackParamList, "Setting"> {
   db: WebSQLDatabase;
 }
 export const Setting = (props: Props) => {
-  const { navigation, db } = props;
+  const { navigation, db, route } = props;
+
+  const existingEntry = !!route.params?.entry;
 
   const [canExit, setCanExit] = useState(false);
-  const [date, setDate] = useState(new Date());
 
+  const [date, setDate] = useState(route.params?.entry.date ?? new Date());
   const [amount, setAmount] = useState(3);
   const [note, setNote] = useState("");
-
   const [type, setType] = useState([
     false,
     false,
@@ -64,15 +65,25 @@ export const Setting = (props: Props) => {
 
   const confirm = () => {
     setCanExit(true);
-    addEntry(
-      db,
-      {
-        date,
-      },
-      () => {
-        navigation.navigate("Main");
-      }
-    );
+    const onComplete = () => navigation.navigate("Main");
+    if (existingEntry) {
+      editEntry(
+        db,
+        {
+          id: route.params.entry.id,
+          date,
+        },
+        onComplete
+      );
+    } else {
+      addEntry(
+        db,
+        {
+          date,
+        },
+        onComplete
+      );
+    }
   };
 
   return (
@@ -92,7 +103,9 @@ export const Setting = (props: Props) => {
           }}
         />
       </ScrollView>
-      <PillButton onPress={confirm}>Create Entry</PillButton>
+      <PillButton onPress={confirm}>
+        {existingEntry ? "Edit" : "Create"} Entry
+      </PillButton>
     </Page>
   );
 };

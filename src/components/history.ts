@@ -54,3 +54,18 @@ export const addEntry = (
     onComplete
   );
 };
+
+export const editEntry = (
+  db: WebSQLDatabase,
+  entry: Poop,
+  onComplete: () => void
+) => {
+  const { id, date } = entry;
+  db.transaction(
+    (tx) => {
+      tx.executeSql(`update items set date = ? where id = ?;`, [date, id]);
+    },
+    undefined,
+    onComplete
+  );
+};

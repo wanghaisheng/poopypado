@@ -49,12 +49,17 @@ export const Main = (props: Props) => {
     navigation.navigate("Setting");
   };
 
+  const editEntry = (entry: Poop) => {
+    navigation.navigate("Setting", { entry });
+  };
+
   return (
     <Page>
       <CalendarContainer>
         <Calendar
           history={history}
           onVisibleMonthChange={setVisibleDate}
+          onEdit={editEntry}
           onDelete={(id) => {
             deleteEntry(db, id, () => {
               const newHistory = history.filter((h) => h.id.toString() !== id);

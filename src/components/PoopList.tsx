@@ -9,11 +9,12 @@ import { PoopEntry } from "./PoopEntry";
 interface Props {
   history: Poop[];
   onClose: () => void;
+  onEdit: (entry: Poop) => void;
   onDelete: (id: string) => void;
 }
 
 export const PoopList = (props: Props) => {
-  const { history, onClose, onDelete } = props;
+  const { history, onClose, onEdit, onDelete } = props;
   const [index, setIndex] = useState(0);
   const hasManyEntries = history.length > 1;
 
@@ -46,7 +47,7 @@ export const PoopList = (props: Props) => {
           </Pressable>
         </Close>
       </Header>
-      <PoopEntry entry={history[index]} onDelete={onDelete} />
+      <PoopEntry entry={history[index]} onEdit={onEdit} onDelete={onDelete} />
     </Container>
   );
 };

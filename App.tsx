@@ -4,13 +4,16 @@ import * as SQLite from "expo-sqlite";
 import React, { useEffect } from "react";
 import { ThemeProvider } from "styled-components/native";
 
+import { Poop } from "./src/components/history";
 import { Main } from "./src/components/Main";
 import { Setting } from "./src/components/Setting";
 import { theme } from "./src/components/theme";
 
 export type RootStackParamList = {
   Main: undefined;
-  Setting: undefined;
+  Setting?: {
+    entry: Poop;
+  };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
