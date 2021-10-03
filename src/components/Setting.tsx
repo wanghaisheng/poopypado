@@ -7,6 +7,7 @@ import { RootStackParamList } from "../../App";
 import { AmountSlider } from "./AmountSlider";
 import { ConfirmationModal } from "./ConfirmationModal";
 import { DatePicker } from "./DatePicker";
+import { addEntry } from "./history";
 import { Note } from "./Note";
 import { Page } from "./Page";
 import { PillButton } from "./PillButton";
@@ -18,6 +19,7 @@ interface Props extends NativeStackScreenProps<RootStackParamList, "Setting"> {
 export const Setting = (props: Props) => {
   const { navigation, db } = props;
 
+  const [canExit, setCanExit] = useState(false);
   const [date, setDate] = useState(new Date());
 
   const [amount, setAmount] = useState(3);
@@ -52,20 +54,20 @@ export const Setting = (props: Props) => {
   React.useEffect(
     () =>
       navigation.addListener("beforeRemove", (e) => {
-        if (!showConfirmModal) {
-          e.preventDefault();
-          setShowConfirmModal(true);
-        }
+        if (canExit) return;
+        e.preventDefault();
+        setCanExit(true);
+        setShowConfirmModal(true);
       }),
-    [navigation, showConfirmModal]
+    [navigation, canExit]
   );
 
   const confirm = () => {
-    db.transaction(
-      (tx) => {
-        tx.executeSql("insert into items (date) values (?)", [
-          date.toISOString(),
-        ]);
+    setCanExit(true);
+    addEntry(
+      db,
+      {
+        date,
       },
       () => {
         navigation.navigate("Main");
@@ -84,7 +86,10 @@ export const Setting = (props: Props) => {
         <ConfirmationModal
           visible={showConfirmModal}
           onConfirm={() => navigation.navigate("Main")}
-          onCancel={() => setShowConfirmModal(false)}
+          onCancel={() => {
+            setShowConfirmModal(false);
+            setCanExit(false);
+          }}
         />
       </ScrollView>
       <PillButton onPress={confirm}>Create Entry</PillButton>

@@ -38,3 +38,19 @@ export const deleteEntry = (
     onComplete
   );
 };
+
+export const addEntry = (
+  db: WebSQLDatabase,
+  entry: Omit<Poop, "id">,
+  onComplete: () => void
+) => {
+  db.transaction(
+    (tx) => {
+      tx.executeSql("insert into items (date) values (?)", [
+        entry.date.toISOString(),
+      ]);
+    },
+    undefined,
+    onComplete
+  );
+};
