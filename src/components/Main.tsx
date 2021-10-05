@@ -6,7 +6,7 @@ import styled from "styled-components/native";
 
 import { RootStackParamList } from "../../App";
 import { Calendar } from "./Calendar";
-import { Card } from "./Card";
+import { Footer } from "./Footer";
 import { Poop, deleteEntry, getEntries } from "./history";
 import { NewEntry } from "./NewEntry";
 import { Page } from "./Page";
@@ -44,26 +44,19 @@ export const Main = (props: Props) => {
 
   return (
     <Page>
-      <CalendarContainer>
-        <Calendar
-          history={history}
-          onVisibleMonthChange={setVisibleDate}
-          onEdit={editEntry}
-          onDelete={(id) => {
-            deleteEntry(db, id, () => {
-              const newHistory = history.filter((h) => h.id.toString() !== id);
-              setHistory(newHistory);
-            });
-          }}
-        />
-      </CalendarContainer>
+      <Calendar
+        history={history}
+        onVisibleMonthChange={setVisibleDate}
+        onEdit={editEntry}
+        onDelete={(id) => {
+          deleteEntry(db, id, () => {
+            const newHistory = history.filter((h) => h.id.toString() !== id);
+            setHistory(newHistory);
+          });
+        }}
+      />
       <NewEntry onNewEntryPress={goToSettingPage} />
+      <Footer />
     </Page>
   );
 };
-
-const CalendarContainer = styled(Card)`
-  flex: 1;
-  padding: 0;
-  overflow: hidden;
-`;

@@ -1,9 +1,10 @@
 import format from "date-fns/format";
 import React, { useState } from "react";
-import { Modal, Pressable } from "react-native";
-import { CalendarList } from "react-native-calendars";
+import { Modal, Pressable, Text } from "react-native";
+import { Calendar as RNCalendar } from "react-native-calendars";
 import styled from "styled-components/native";
 
+import { Card } from "./Card";
 import { Poop, historyDateHash } from "./history";
 import { PoopList } from "./PoopList";
 
@@ -27,11 +28,13 @@ export const Calendar = (props: Props) => {
   const dateHash = historyDateHash(history);
 
   return (
-    <>
-      <CalendarList
-        onVisibleMonthsChange={(months) => {
-          onVisibleMonthChange(new Date(months[0].dateString));
+    <Container>
+      <RNCalendar
+        onMonthChange={(date) => {
+          onVisibleMonthChange(new Date(date.dateString));
         }}
+        renderHeader={() => <Text />}
+        firstDay={1}
         dayComponent={({ date }) => {
           const count = counts[date.dateString];
           return (
@@ -55,10 +58,6 @@ export const Calendar = (props: Props) => {
             </Pressable>
           );
         }}
-        futureScrollRange={3}
-        scrollEnabled
-        showScrollIndicator
-        firstDay={1}
       />
       {selectedDateHistory && (
         <Modal transparent>
@@ -68,7 +67,10 @@ export const Calendar = (props: Props) => {
               onClose={() => {
                 setSelectedDateHistory(null);
               }}
-              onEdit={onEdit}
+              onEdit={(entry) => {
+                setSelectedDateHistory(null);
+                onEdit(entry);
+              }}
               onDelete={(id) => {
                 onDelete(id);
                 setSelectedDateHistory(null);
@@ -77,9 +79,13 @@ export const Calendar = (props: Props) => {
           </EntryModalContainer>
         </Modal>
       )}
-    </>
+    </Container>
   );
 };
+
+const Container = styled(Card)`
+  background: white;
+`;
 
 const DayContainer = styled.View`
   height: 40px;

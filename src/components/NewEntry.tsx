@@ -1,5 +1,5 @@
 import React from "react";
-import { Text } from "react-native";
+import styled from "styled-components/native";
 
 import { Card } from "./Card";
 import { PillButton } from "./PillButton";
@@ -12,9 +12,21 @@ export const NewEntry = (props: Props) => {
   const { onNewEntryPress } = props;
 
   return (
-    <Card>
-      <Text>Hint: Click on a date for more information</Text>
+    <Container>
+      <Intruction>Hint: Click on a date for more information</Intruction>
       <PillButton onPress={onNewEntryPress}>New Poop</PillButton>
-    </Card>
+    </Container>
   );
 };
+
+const Container = styled(Card)`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Intruction = styled.Text`
+  font-size: 16px;
+  margin-bottom: 8px;
+`;
