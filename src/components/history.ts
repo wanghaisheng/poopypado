@@ -5,6 +5,8 @@ export interface Poop {
   id: number;
   date: Date;
   type: boolean[];
+  amount: number;
+  note: string;
 }
 
 /**
@@ -14,6 +16,8 @@ interface PoopDB {
   id: number;
   date: string;
   type: string;
+  amount: number;
+  note: string;
 }
 
 interface DateHash {
@@ -25,9 +29,11 @@ export const initTable = (db: WebSQLDatabase) => {
     tx.executeSql(
       `CREATE TABLE IF NOT EXISTS items 
         (
-          id integer primary key not null, 
-          date text NOT NULL, 
-          type text
+          id INTEGER PRIMARY KEY NOT NULL, 
+          date TEXT NOT NULL, 
+          type TEXT,
+          amount NUMBER,
+          note TEXT
         );
       `
     );
@@ -48,8 +54,11 @@ export const getEntries = (
             id: a.id,
             date: new Date(a.date),
             type: JSON.parse(a.type),
+            amount: a.amount,
+            note: a.note,
           })
         );
+        console.log("entries: ", entries);
         onComplete(entries);
       }
     );
@@ -88,6 +97,8 @@ export const deleteEntry = (
 const entryToDBEntry = (entry: Omit<Poop, "id">): Omit<PoopDB, "id"> => ({
   date: entry.date.toISOString(),
   type: JSON.stringify(entry.type),
+  amount: entry.amount,
+  note: entry.note,
 });
 
 export const addEntry = (
@@ -100,10 +111,10 @@ export const addEntry = (
     (tx) => {
       tx.executeSql(
         `
-          INSERT INTO items (date, type) 
-          VALUES (?, ?)
+          INSERT INTO items (date, type, amount, note) 
+          VALUES (?, ?, ?, ?)
         `,
-        [dbEntry.date, dbEntry.type]
+        [dbEntry.date, dbEntry.type, dbEntry.amount, dbEntry.note]
       );
     },
     (error) => {
@@ -125,10 +136,12 @@ export const editEntry = (
         `
           UPDATE items 
           SET date = ?,
-              type = ? 
+              type = ?, 
+              amount = ?, 
+              note = ?
           WHERE id = ?;
         `,
-        [dbEntry.date, dbEntry.type, entry.id]
+        [dbEntry.date, dbEntry.type, dbEntry.amount, dbEntry.note, entry.id]
       );
     },
     undefined,

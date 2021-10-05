@@ -22,16 +22,19 @@ export const Setting = (props: Props) => {
   const existingEntry = route.params?.entry;
   const hasExistingEntry = !!existingEntry;
 
-  const [canExit, setCanExit] = useState(false);
-
+  /**
+   * Entry data
+   */
   const [date, setDate] = useState(route.params?.entry.date ?? new Date());
-  const [amount, setAmount] = useState(3);
-  const [note, setNote] = useState("");
   const [type, setType] = useState(
     hasExistingEntry && Array.isArray(existingEntry?.type)
       ? existingEntry.type
       : [false, false, false, false, false, false, false]
   );
+  const [amount, setAmount] = useState(route.params?.entry.amount ?? 3);
+  const [note, setNote] = useState(route.params?.entry.note ?? "");
+
+  const [canExit, setCanExit] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   useEffect(() => {
     navigation.setOptions({
@@ -66,6 +69,8 @@ export const Setting = (props: Props) => {
     const commonData: Omit<Poop, "id"> = {
       date,
       type,
+      amount,
+      note,
     };
     if (hasExistingEntry) {
       editEntry(
