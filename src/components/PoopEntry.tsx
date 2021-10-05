@@ -21,15 +21,31 @@ export const PoopEntry = (props: Props) => {
       <Text>id: {entry.id}</Text>
       <Spacer size="8" />
       <Text>time: {format(entry.date, "HH:mm dd/MM/yyyy")}</Text>
-      <Spacer size="8" />
-      <Text>
-        type: {entry.type.map((selected, i) => (selected ? `${i} ` : ""))}
-      </Text>
-      <Spacer size="8" />
-      <Text>amount: {entry.amount}</Text>
-      <Spacer size="8" />
-      <Text>note:</Text>
-      <NoteDisplay>{entry.note}</NoteDisplay>
+
+      {entry.type && (
+        <>
+          <Spacer size="8" />
+          <Text>
+            type: {entry.type.map((selected, i) => (selected ? `${i} ` : ""))}
+          </Text>
+        </>
+      )}
+
+      {entry.type && (
+        <>
+          <Spacer size="8" />
+          <Text>amount: {entry.amount}</Text>
+        </>
+      )}
+
+      {entry.type && (
+        <>
+          <Spacer size="8" />
+          <Text>note:</Text>
+          <NoteDisplay>{entry.note}</NoteDisplay>
+        </>
+      )}
+
       <Spacer size="8" />
       <Icon
         name="edit"
