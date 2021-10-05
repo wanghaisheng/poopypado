@@ -4,7 +4,7 @@ import * as SQLite from "expo-sqlite";
 import React, { useEffect } from "react";
 import { ThemeProvider } from "styled-components/native";
 
-import { Poop } from "./src/components/history";
+import { Poop, initTable } from "./src/components/history";
 import { Main } from "./src/components/Main";
 import { Setting } from "./src/components/Setting";
 import { theme } from "./src/components/theme";
@@ -21,13 +21,8 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const db = SQLite.openDatabase("db");
 
 export default function App() {
-  // Init table
   useEffect(() => {
-    db.transaction((tx) => {
-      tx.executeSql(
-        "create table if not exists items (id integer primary key not null, date text);"
-      );
-    });
+    initTable(db);
   }, []);
 
   return (

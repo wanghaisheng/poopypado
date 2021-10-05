@@ -7,7 +7,7 @@ import styled from "styled-components/native";
 import { RootStackParamList } from "../../App";
 import { Calendar } from "./Calendar";
 import { Card } from "./Card";
-import { Poop, deleteEntry } from "./history";
+import { Poop, deleteEntry, getEntries } from "./history";
 import { NewEntry } from "./NewEntry";
 import { Page } from "./Page";
 
@@ -22,19 +22,8 @@ export const Main = (props: Props) => {
 
   // Get history
   useEffect(() => {
-    db.transaction((tx) => {
-      tx.executeSql(
-        `SELECT * FROM items ORDER BY date(date) DESC;`,
-        [],
-        (_, { rows }) => {
-          setHistory(
-            (rows as any)._array.map((a: any) => ({
-              id: a.id,
-              date: new Date(a.date),
-            }))
-          );
-        }
-      );
+    getEntries(db, (entries) => {
+      setHistory(entries);
     });
   }, []);
 

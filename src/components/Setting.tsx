@@ -7,7 +7,7 @@ import { RootStackParamList } from "../../App";
 import { AmountSlider } from "./AmountSlider";
 import { ConfirmationModal } from "./ConfirmationModal";
 import { DatePicker } from "./DatePicker";
-import { addEntry, editEntry } from "./history";
+import { Poop, addEntry, editEntry } from "./history";
 import { Note } from "./Note";
 import { Page } from "./Page";
 import { PillButton } from "./PillButton";
@@ -19,22 +19,19 @@ interface Props extends NativeStackScreenProps<RootStackParamList, "Setting"> {
 export const Setting = (props: Props) => {
   const { navigation, db, route } = props;
 
-  const existingEntry = !!route.params?.entry;
+  const existingEntry = route.params?.entry;
+  const hasExistingEntry = !!existingEntry;
 
   const [canExit, setCanExit] = useState(false);
 
   const [date, setDate] = useState(route.params?.entry.date ?? new Date());
   const [amount, setAmount] = useState(3);
   const [note, setNote] = useState("");
-  const [type, setType] = useState([
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const [type, setType] = useState(
+    hasExistingEntry && Array.isArray(existingEntry?.type)
+      ? existingEntry.type
+      : [false, false, false, false, false, false, false]
+  );
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   useEffect(() => {
     navigation.setOptions({
@@ -66,23 +63,21 @@ export const Setting = (props: Props) => {
   const confirm = () => {
     setCanExit(true);
     const onComplete = () => navigation.navigate("Main");
-    if (existingEntry) {
+    const commonData: Omit<Poop, "id"> = {
+      date,
+      type,
+    };
+    if (hasExistingEntry) {
       editEntry(
         db,
         {
           id: route.params.entry.id,
-          date,
+          ...commonData,
         },
         onComplete
       );
     } else {
-      addEntry(
-        db,
-        {
-          date,
-        },
-        onComplete
-      );
+      addEntry(db, commonData, onComplete);
     }
   };
 
@@ -104,7 +99,7 @@ export const Setting = (props: Props) => {
         />
       </ScrollView>
       <PillButton onPress={confirm}>
-        {existingEntry ? "Edit" : "Create"} Entry
+        {hasExistingEntry ? "Edit" : "Create"} Entry
       </PillButton>
     </Page>
   );
