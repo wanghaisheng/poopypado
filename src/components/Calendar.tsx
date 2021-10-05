@@ -1,7 +1,7 @@
 import format from "date-fns/format";
 import React, { useState } from "react";
 import { Modal, Pressable, Text } from "react-native";
-import { Calendar as RNCalendar } from "react-native-calendars";
+import { CalendarList } from "react-native-calendars";
 import styled from "styled-components/native";
 
 import { Card } from "./Card";
@@ -29,9 +29,11 @@ export const Calendar = (props: Props) => {
 
   return (
     <Container>
-      <RNCalendar
-        onMonthChange={(date) => {
-          onVisibleMonthChange(new Date(date.dateString));
+      <CalendarList
+        horizontal
+        pagingEnabled
+        onVisibleMonthsChange={(months) => {
+          onVisibleMonthChange(new Date(months[0].dateString));
         }}
         renderHeader={() => <Text />}
         firstDay={1}
