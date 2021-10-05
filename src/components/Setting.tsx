@@ -41,7 +41,12 @@ export const Setting = (props: Props) => {
       headerBackVisible: false,
       headerRight: () => {
         return (
-          <TouchableOpacity onPress={() => setShowConfirmModal(true)}>
+          <TouchableOpacity
+            onPress={() => {
+              setCanExit(true);
+              setShowConfirmModal(true);
+            }}
+          >
             <View>
               <Text>X</Text>
             </View>
