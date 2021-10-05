@@ -2,7 +2,6 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { format } from "date-fns";
 import { WebSQLDatabase } from "expo-sqlite";
 import React, { useEffect, useState } from "react";
-import styled from "styled-components/native";
 
 import { RootStackParamList } from "../../App";
 import { Calendar } from "./Calendar";

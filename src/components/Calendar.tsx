@@ -36,6 +36,7 @@ export const Calendar = (props: Props) => {
           onVisibleMonthChange(new Date(months[0].dateString));
         }}
         renderHeader={() => <Text />}
+        futureScrollRange={3}
         firstDay={1}
         dayComponent={({ date }) => {
           const count = counts[date.dateString];
@@ -86,6 +87,8 @@ export const Calendar = (props: Props) => {
 };
 
 const Container = styled(Card)`
+  padding: 0;
+  overflow: hidden;
   background: white;
 `;
 
