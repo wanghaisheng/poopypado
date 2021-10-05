@@ -10,7 +10,9 @@ import { Setting } from "./src/components/Setting";
 import { theme } from "./src/components/theme";
 
 export type RootStackParamList = {
-  Main: undefined;
+  Main?: {
+    hasUpdate: true;
+  };
   Setting?: {
     entry: Poop;
   };

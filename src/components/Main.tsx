@@ -16,7 +16,7 @@ interface Props extends NativeStackScreenProps<RootStackParamList, "Main"> {
 }
 
 export const Main = (props: Props) => {
-  const { navigation, db } = props;
+  const { navigation, route, db } = props;
 
   const [history, setHistory] = useState<Poop[]>([]);
 
@@ -25,7 +25,7 @@ export const Main = (props: Props) => {
     getEntries(db, (entries) => {
       setHistory(entries);
     });
-  }, []);
+  }, [route]);
 
   // set title to current month
   const [visibleDate, setVisibleDate] = useState(new Date());

@@ -70,7 +70,7 @@ export const Setting = (props: Props) => {
 
   const confirm = () => {
     setCanExit(true);
-    const onComplete = () => navigation.navigate("Main");
+    const onComplete = () => navigation.navigate("Main", { hasUpdate: true });
     const commonData: Omit<Poop, "id"> = {
       date,
       type,
