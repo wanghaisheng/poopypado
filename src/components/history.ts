@@ -53,7 +53,7 @@ export const getEntries = (
           (a: PoopDB): Poop => ({
             id: a.id,
             date: new Date(a.date),
-            type: JSON.parse(a.type),
+            type: a.type && JSON.parse(a.type),
             amount: a.amount,
             note: a.note,
           })

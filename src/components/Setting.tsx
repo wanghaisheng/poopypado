@@ -12,6 +12,7 @@ import { Note } from "./Note";
 import { Page } from "./Page";
 import { PillButton } from "./PillButton";
 import { TypeSelect } from "./TypeSelect";
+import { ColourSelect } from "./ColourSelect";
 
 interface Props extends NativeStackScreenProps<RootStackParamList, "Setting"> {
   db: WebSQLDatabase;
@@ -31,6 +32,7 @@ export const Setting = (props: Props) => {
       ? existingEntry.type
       : [false, false, false, false, false, false, false]
   );
+  const [colour, setColour] = useState([false, false, false, false, false]);
   const [amount, setAmount] = useState(route.params?.entry.amount ?? 3);
   const [note, setNote] = useState(route.params?.entry.note ?? "");
 
@@ -96,6 +98,7 @@ export const Setting = (props: Props) => {
       <ScrollView>
         <DatePicker date={date} onChange={(d) => setDate(d)} />
         <TypeSelect type={type} onTypeSelect={setType} />
+        <ColourSelect colour={colour} setColour={setColour} />
         <AmountSlider amount={amount} setAmount={setAmount} />
         <Note value={note} setValue={setNote} />
 
