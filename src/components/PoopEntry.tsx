@@ -3,10 +3,10 @@ import React from "react";
 import { Text } from "react-native";
 import styled from "styled-components/native";
 
-import { Card } from "./Card";
 import { Poop } from "./history";
 import { Icon } from "./Icon";
 import { Spacer } from "./Spacer";
+import { typeInfoArr } from "./TypeSelect";
 
 interface Props {
   entry: Poop;
@@ -16,37 +16,47 @@ interface Props {
 
 export const PoopEntry = (props: Props) => {
   const { entry, onEdit, onDelete } = props;
+
+  const hasTypeEntry = entry.type.filter((t) => t).length !== 0;
+
   return (
-    <Card>
-      <Text>id: {entry.id}</Text>
-      <Spacer size="8" />
-      <Text>time: {format(entry.date, "HH:mm dd/MM/yyyy")}</Text>
+    <Container>
+      <InfoContainer>
+        <Text>time: {format(entry.date, "HH:mm dd/MM/yyyy")}</Text>
 
-      {entry.type && (
-        <>
-          <Spacer size="8" />
-          <Text>
-            type: {entry.type.map((selected, i) => (selected ? `${i} ` : ""))}
-          </Text>
-        </>
-      )}
+        {hasTypeEntry && (
+          <>
+            <Spacer size="8" />
+            <Text>
+              type:{" "}
+              {entry.type
+                .map((selected, i) => {
+                  console.log("selected: ", selected);
+                  return selected ? `${typeInfoArr[i].title}` : "";
+                })
+                .filter((info) => !!info)
+                .join(", ")}
+            </Text>
+          </>
+        )}
 
-      {entry.type && (
-        <>
-          <Spacer size="8" />
-          <Text>amount: {entry.amount}</Text>
-        </>
-      )}
+        {entry.amount && (
+          <>
+            <Spacer size="8" />
+            <Text>amount: {entry.amount}</Text>
+          </>
+        )}
 
-      {entry.type && (
-        <>
-          <Spacer size="8" />
-          <Text>note:</Text>
-          <NoteDisplay>{entry.note}</NoteDisplay>
-        </>
-      )}
+        {entry.note && (
+          <>
+            <Spacer size="8" />
+            <Text>note:</Text>
+            <NoteDisplay>{entry.note}</NoteDisplay>
+          </>
+        )}
+        <Spacer size="12" />
+      </InfoContainer>
 
-      <Spacer size="12" />
       <ActionContainer>
         <TrashIconContainer>
           <Icon
@@ -61,9 +71,16 @@ export const PoopEntry = (props: Props) => {
           }}
         />
       </ActionContainer>
-    </Card>
+    </Container>
   );
 };
+
+const Container = styled.View`
+  flex: 1;
+  justify-content: space-between;
+`;
+
+const InfoContainer = styled.View``;
 
 const NoteDisplay = styled.Text`
   min-height: 120px;
@@ -78,5 +95,5 @@ const ActionContainer = styled.View`
 `;
 
 const TrashIconContainer = styled.View`
-  margin-right: 20px;
+  margin-right: 36px;
 `;

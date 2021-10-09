@@ -1,6 +1,5 @@
 import React from "react";
-import { Text } from "react-native";
-import styled from "styled-components/native";
+import { Text, View } from "react-native";
 
 import { Card } from "./Card";
 import { TypeButton } from "./TypeButton";
@@ -10,25 +9,25 @@ interface Props {
   onTypeSelect: (type: boolean[]) => void;
 }
 
+export const typeInfoArr = [
+  { title: "Type 1", description: "Small, hard and difficult to pass" },
+  { title: "Type  2", description: "Sausage-shaped but lumpy" },
+  { title: "Type  3", description: "Sausage-shaped but cracked" },
+  { title: "Type  4", description: "Sausage-shaped, smooth and soft" },
+  { title: "Type  5", description: "Small and soft with defined edges" },
+  {
+    title: "Type  6",
+    description: "Very small, fluffy/mushy pieces with ragged edges",
+  },
+  { title: "Type  7", description: "watery with no solid pieces" },
+];
+
 export const TypeSelect = (props: Props) => {
   const { onTypeSelect, type } = props;
 
-  const typeInfoArr = [
-    { title: "Type 1", description: "Small, hard and difficult to pass" },
-    { title: "Type  2", description: "Sausage-shaped but lumpy" },
-    { title: "Type  3", description: "Sausage-shaped but cracked" },
-    { title: "Type  4", description: "Sausage-shaped, smooth and soft" },
-    { title: "Type  5", description: "Small and soft with defined edges" },
-    {
-      title: "Type  6",
-      description: "Very small, fluffy/mushy pieces with ragged edges",
-    },
-    { title: "Type  7", description: "watery with no solid pieces" },
-  ];
-
   return (
     <Card>
-      <Content>
+      <View>
         <Text>Select Type(s)</Text>
         {typeInfoArr.map((typeInfo, index) => (
           <TypeButton
@@ -44,13 +43,7 @@ export const TypeSelect = (props: Props) => {
             key={index}
           />
         ))}
-      </Content>
+      </View>
     </Card>
   );
 };
-
-const Content = styled.View``;
-
-const TypeContent = styled.View`
-  height: 68px;
-`;

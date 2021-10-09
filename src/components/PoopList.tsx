@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Pressable, Text } from "react-native";
+import { Pressable } from "react-native";
 import styled from "styled-components/native";
 
 import { Card } from "./Card";
 import { Poop } from "./history";
 import { Icon } from "./Icon";
 import { PoopEntry } from "./PoopEntry";
+import { Spacer } from "./Spacer";
 
 interface Props {
   history: Poop[];
@@ -48,6 +49,8 @@ export const PoopList = (props: Props) => {
           </Pressable>
         </Close>
       </Header>
+      <Spacer size="24" />
+
       <PoopEntry entry={history[index]} onEdit={onEdit} onDelete={onDelete} />
     </Container>
   );
