@@ -50,16 +50,17 @@ export const Calendar = (props: Props) => {
               }}
             >
               <DayContainer>
-                <DayLabelContainer>
-                  <DayLabel>{date.day}</DayLabel>
-                </DayLabelContainer>
-                <CountContainer
-                  thisMonth={
-                    date.month === currentMonth && date.year === currentYear
-                  }
-                >
-                  <Count>{count > 0 ? count : ""}</Count>
-                </CountContainer>
+                <DayLabel>{date.day}</DayLabel>
+                <CountBubbleContainer>
+                  <CountBubble
+                    hasEntry={!!count}
+                    thisMonth={
+                      date.month === currentMonth && date.year === currentYear
+                    }
+                  >
+                    <Count>{count > 0 ? count : ""}</Count>
+                  </CountBubble>
+                </CountBubbleContainer>
               </DayContainer>
             </Pressable>
           );
@@ -96,28 +97,40 @@ const Container = styled(Card)`
 `;
 
 const DayContainer = styled.View`
-  height: 40px;
-`;
-
-const DayLabelContainer = styled.View`
-  position: absolute;
-  left: 0;
-  top: 0;
+  height: 45px;
+  width: 45px;
 `;
 
 const DayLabel = styled.Text`
+  text-align: center;
   font-size: 10px;
 `;
 
-const CountContainer = styled.View<{ thisMonth: boolean }>`
-  width: 25px;
-  height: 25px;
+const getDaySize = (p: { thisMonth: boolean; hasEntry: boolean }): string => {
+  if (!p.thisMonth) return "16px";
+  if (!p.hasEntry) return "16px";
+  return "30px";
+};
+
+const CountBubbleContainer = styled.View`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const CountBubble = styled.View<{ thisMonth: boolean; hasEntry: boolean }>`
+  width: ${(p) => getDaySize(p)};
+  height: ${(p) => getDaySize(p)};
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50px;
-  background: ${(p) => (p.thisMonth ? p.theme.color.main : "grey")};
-  margin-top: 14px;
+  background: ${(p) => {
+    if (!p.thisMonth) return p.theme.color.grey;
+    if (!p.hasEntry) return p.theme.color.emptyMain;
+    return p.theme.color.main;
+  }};
 `;
 
 const Count = styled.Text`
