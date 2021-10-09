@@ -56,7 +56,7 @@ export const Main = (props: Props) => {
   return (
     <Page>
       <Calendar
-        key={calendarKey}
+        calendarKey={calendarKey}
         history={history}
         onVisibleMonthChange={setVisibleDate}
         onEdit={editEntry}

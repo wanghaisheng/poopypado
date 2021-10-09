@@ -17,11 +17,12 @@ interface Props {
    * A workaround to set the calendar view back to current month.
    * Update this number to set month to current month
    */
-  key: number;
+  calendarKey: number;
 }
 
 export const Calendar = (props: Props) => {
-  const { history, onVisibleMonthChange, onEdit, onDelete, key } = props;
+  const { history, onVisibleMonthChange, onEdit, onDelete, calendarKey } =
+    props;
 
   const counts = historyToCounts(history);
   const currentMonth = new Date().getMonth() + 1;
@@ -35,7 +36,7 @@ export const Calendar = (props: Props) => {
   return (
     <Container>
       <RNCalendar
-        key={key}
+        key={calendarKey}
         enableSwipeMonths
         onMonthChange={(month) => {
           onVisibleMonthChange(new Date(month.dateString));
@@ -67,31 +68,28 @@ export const Calendar = (props: Props) => {
         }}
       />
       {selectedDateHistory && (
-        <Modal transparent>
-          <EntryModalContainer>
-            <PoopList
-              history={selectedDateHistory}
-              onClose={() => {
-                setSelectedDateHistory(null);
-              }}
-              onEdit={(entry) => {
-                setSelectedDateHistory(null);
-                onEdit(entry);
-              }}
-              onDelete={(id) => {
-                onDelete(id);
-                setSelectedDateHistory(null);
-              }}
-            />
-          </EntryModalContainer>
-        </Modal>
+        <EntryContainer>
+          <PoopList
+            history={selectedDateHistory}
+            onClose={() => {
+              setSelectedDateHistory(null);
+            }}
+            onEdit={(entry) => {
+              setSelectedDateHistory(null);
+              onEdit(entry);
+            }}
+            onDelete={(id) => {
+              onDelete(id);
+              setSelectedDateHistory(null);
+            }}
+          />
+        </EntryContainer>
       )}
     </Container>
   );
 };
 
 const Container = styled(Card)`
-  padding: 0 12px 36px;
   overflow: hidden;
   background: white;
 `;
@@ -137,10 +135,10 @@ const Count = styled.Text`
   color: white;
 `;
 
-const EntryModalContainer = styled.View`
-  flex: 1;
-  justify-content: center;
-  padding: 12px;
+const EntryContainer = styled.View`
+  position: absolute;
+  height: 100%;
+  width: 100%;
 `;
 
 /**

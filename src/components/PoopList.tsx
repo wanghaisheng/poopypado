@@ -52,7 +52,10 @@ export const PoopList = (props: Props) => {
   );
 };
 
-const Container = styled(Card)``;
+const Container = styled(Card)`
+  width: 100%;
+  height: 100%;
+`;
 
 const Header = styled.View``;
 
