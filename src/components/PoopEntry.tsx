@@ -46,14 +46,21 @@ export const PoopEntry = (props: Props) => {
         </>
       )}
 
-      <Spacer size="8" />
-      <Icon
-        name="edit"
-        onPress={() => {
-          onEdit(entry);
-        }}
-      />
-      <Icon name="trash-alt" onPress={() => onDelete(entry.id.toString())} />
+      <Spacer size="12" />
+      <ActionContainer>
+        <TrashIconContainer>
+          <Icon
+            name="trash-alt"
+            onPress={() => onDelete(entry.id.toString())}
+          />
+        </TrashIconContainer>
+        <Icon
+          name="edit"
+          onPress={() => {
+            onEdit(entry);
+          }}
+        />
+      </ActionContainer>
     </Card>
   );
 };
@@ -63,4 +70,13 @@ const NoteDisplay = styled.Text`
   padding: 12px;
   border-radius: 3px;
   background: white;
+`;
+
+const ActionContainer = styled.View`
+  flex-direction: row;
+  justify-content: flex-end;
+`;
+
+const TrashIconContainer = styled.View`
+  margin-right: 20px;
 `;

@@ -4,6 +4,7 @@ import styled from "styled-components/native";
 
 import { Card } from "./Card";
 import { Poop } from "./history";
+import { Icon } from "./Icon";
 import { PoopEntry } from "./PoopEntry";
 
 interface Props {
@@ -31,19 +32,19 @@ export const PoopList = (props: Props) => {
         {hasManyEntries && (
           <Navigation>
             <Pressable onPress={onLeft}>
-              <Text>LEFT</Text>
+              <Icon name="angle-left" />
             </Pressable>
-            <Text>
+            <EntryText>
               Entry {index + 1}/{history.length}
-            </Text>
+            </EntryText>
             <Pressable onPress={onRight}>
-              <Text>Right</Text>
+              <Icon name="angle-right" />
             </Pressable>
           </Navigation>
         )}
         <Close>
           <Pressable onPress={onClose}>
-            <Text>X</Text>
+            <Icon name="times" />
           </Pressable>
         </Close>
       </Header>
@@ -62,9 +63,15 @@ const Header = styled.View``;
 const Navigation = styled.View`
   flex-direction: row;
   justify-content: center;
+  align-items: center;
+`;
+
+const EntryText = styled.Text`
+  font-size: 18px;
+  margin: 0 8px;
 `;
 
 const Close = styled.View`
   position: absolute;
-  right: 0px;
+  right: 0;
 `;
