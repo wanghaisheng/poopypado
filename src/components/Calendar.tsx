@@ -1,6 +1,6 @@
 import format from "date-fns/format";
 import React, { useState } from "react";
-import { Modal, Pressable, Text } from "react-native";
+import { Modal, Pressable } from "react-native";
 import { Calendar as RNCalendar } from "react-native-calendars";
 import styled from "styled-components/native";
 
@@ -13,10 +13,15 @@ interface Props {
   onVisibleMonthChange: (date: Date) => void;
   onEdit: (entry: Poop) => void;
   onDelete: (id: string) => void;
+  /**
+   * A workaround to set the calendar view back to current month.
+   * Update this number to set month to current month
+   */
+  key: number;
 }
 
 export const Calendar = (props: Props) => {
-  const { history, onVisibleMonthChange, onEdit, onDelete } = props;
+  const { history, onVisibleMonthChange, onEdit, onDelete, key } = props;
 
   const counts = historyToCounts(history);
   const currentMonth = new Date().getMonth() + 1;
@@ -30,6 +35,7 @@ export const Calendar = (props: Props) => {
   return (
     <Container>
       <RNCalendar
+        key={key}
         enableSwipeMonths
         onMonthChange={(month) => {
           onVisibleMonthChange(new Date(month.dateString));
