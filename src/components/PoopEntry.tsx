@@ -36,7 +36,6 @@ export const PoopEntry = (props: Props) => {
               <Text>
                 {entry.type
                   .map((selected, i) => {
-                    console.log("selected: ", selected);
                     return selected ? `${typeInfoArr[i].title}` : "";
                   })
                   .filter((info) => !!info)
