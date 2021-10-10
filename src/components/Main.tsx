@@ -2,12 +2,12 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { format } from "date-fns";
 import { WebSQLDatabase } from "expo-sqlite";
 import React, { useEffect, useState } from "react";
-import { Button } from "react-native";
 
 import { RootStackParamList } from "../../App";
 import { Calendar } from "./Calendar";
 import { Footer } from "./Footer";
 import { Poop, deleteEntry, getEntries } from "./history";
+import { Icon } from "./Icon";
 import { NewEntry } from "./NewEntry";
 import { Page } from "./Page";
 
@@ -36,9 +36,9 @@ export const Main = (props: Props) => {
     navigation.setOptions({
       title: format(visibleDate, "MMMM yyyy"),
       headerRight: () => (
-        <Button
+        <Icon
           onPress={() => setCalendarKey(calendarKey + 1)}
-          title="Today"
+          name="calendar"
           disabled={visibleDate.getMonth() === new Date().getMonth()}
         />
       ),
