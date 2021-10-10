@@ -6,6 +6,8 @@ import styled from "styled-components/native";
 import { Card } from "./Card";
 import { theme } from "./theme";
 
+export const amountSizes = ["XS", "S", "M", "L", "XL"];
+
 interface Props {
   amount: number;
   setAmount: (amount: number) => void;

@@ -3,6 +3,7 @@ import React from "react";
 import { Text } from "react-native";
 import styled from "styled-components/native";
 
+import { amountSizes } from "./AmountSlider";
 import { Poop } from "./history";
 import { Icon } from "./Icon";
 import { Spacer } from "./Spacer";
@@ -22,38 +23,47 @@ export const PoopEntry = (props: Props) => {
   return (
     <Container>
       <InfoContainer>
-        <Text>time: {format(entry.date, "HH:mm dd/MM/yyyy")}</Text>
+        <InfoRow>
+          <Label>Time: </Label>
+          <Text>{format(entry.date, "HH:mm dd/MM/yyyy")}</Text>
+        </InfoRow>
 
         {hasTypeEntry && (
           <>
             <Spacer size="8" />
-            <Text>
-              type:{" "}
-              {entry.type
-                .map((selected, i) => {
-                  console.log("selected: ", selected);
-                  return selected ? `${typeInfoArr[i].title}` : "";
-                })
-                .filter((info) => !!info)
-                .join(", ")}
-            </Text>
+            <InfoRow>
+              <Label>Type: </Label>
+              <Text>
+                {entry.type
+                  .map((selected, i) => {
+                    console.log("selected: ", selected);
+                    return selected ? `${typeInfoArr[i].title}` : "";
+                  })
+                  .filter((info) => !!info)
+                  .join(", ")}
+              </Text>
+            </InfoRow>
           </>
         )}
 
         {entry.amount && (
           <>
             <Spacer size="8" />
-            <Text>amount: {entry.amount}</Text>
+            <InfoRow>
+              <Label>Amount: </Label>
+              <Text>{amountSizes[entry.amount - 1]}</Text>
+            </InfoRow>
           </>
         )}
 
-        {entry.note && (
+        {entry.note ? (
           <>
             <Spacer size="8" />
-            <Text>note:</Text>
+            <Label>Note: </Label>
+            <Spacer size="8" />
             <NoteDisplay>{entry.note}</NoteDisplay>
           </>
-        )}
+        ) : undefined}
         <Spacer size="12" />
       </InfoContainer>
 
@@ -81,6 +91,16 @@ const Container = styled.View`
 `;
 
 const InfoContainer = styled.View``;
+
+const InfoRow = styled.View`
+  flex-direction: row;
+`;
+
+const Label = styled.Text`
+  font-weight: 700;
+  width: 60px;
+  margin-right: 8px;
+`;
 
 const NoteDisplay = styled.Text`
   min-height: 120px;
