@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 
 import { Card } from "./Card";
 import { PillButton } from "./PillButton";
+import { Spacer } from "./Spacer";
 
 interface Props {
   onNewEntryPress: () => void;
@@ -14,6 +15,7 @@ export const NewEntry = (props: Props) => {
   return (
     <Container>
       <Intruction>Hint: Click on a date for more information</Intruction>
+      <Spacer size="8" />
       <PillButton onPress={onNewEntryPress}>New Poop</PillButton>
     </Container>
   );
