@@ -69,7 +69,6 @@ export const Main = (props: Props) => {
         }}
       />
       <NewEntry onNewEntryPress={goToSettingPage} />
-      <Footer />
     </Page>
   );
 };
