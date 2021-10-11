@@ -2,7 +2,6 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { WebSQLDatabase } from "expo-sqlite";
 import React, { useEffect, useState } from "react";
 import { ScrollView } from "react-native";
-import styled from "styled-components/native";
 
 import { RootStackParamList } from "../../App";
 import { AmountSlider } from "./AmountSlider";
@@ -35,7 +34,14 @@ export const Setting = (props: Props) => {
       ? existingEntry.type
       : [false, false, false, false, false, false, false]
   );
-  const [colour, setColour] = useState([false, false, false, false, false]);
+  const [colour, setColour] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
   const [amount, setAmount] = useState(route.params?.entry.amount ?? 3);
   const [note, setNote] = useState(route.params?.entry.note ?? "");
 
@@ -74,6 +80,7 @@ export const Setting = (props: Props) => {
     const commonData: Omit<Poop, "id"> = {
       date,
       type,
+      color: colour,
       amount,
       note,
     };

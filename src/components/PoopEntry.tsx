@@ -4,6 +4,8 @@ import { Text } from "react-native";
 import styled from "styled-components/native";
 
 import { amountSizes } from "./AmountSlider";
+import { ColorBox } from "./ColorBox";
+import { poopColourArr } from "./ColourSelect";
 import { Poop } from "./history";
 import { Icon } from "./Icon";
 import { Spacer } from "./Spacer";
@@ -19,6 +21,7 @@ export const PoopEntry = (props: Props) => {
   const { entry, onEdit, onDelete } = props;
 
   const hasTypeEntry = entry.type?.filter((t) => t).length || 0 !== 0;
+  const hasColorEntry = entry.color?.filter((t) => t).length || 0 !== 0;
 
   return (
     <Container>
@@ -41,6 +44,28 @@ export const PoopEntry = (props: Props) => {
                   .filter((info) => !!info)
                   .join(", ")}
               </Text>
+            </InfoRow>
+          </>
+        )}
+
+        {hasColorEntry && (
+          <>
+            <Spacer size="8" />
+            <InfoRow>
+              <Label>Color: </Label>
+              <ColorBoxContainer>
+                {entry.color.map((selected, i) => {
+                  if (!selected) return undefined;
+
+                  const poopColor = poopColourArr[i];
+                  return (
+                    <ColorBoxStyled
+                      key={poopColor}
+                      backgroundColour={poopColor}
+                    />
+                  );
+                })}
+              </ColorBoxContainer>
             </InfoRow>
           </>
         )}
@@ -98,6 +123,14 @@ const InfoRow = styled.View`
 const Label = styled.Text`
   font-weight: 700;
   width: 60px;
+  margin-right: 8px;
+`;
+
+const ColorBoxContainer = styled.View`
+  flex-direction: row;
+`;
+
+const ColorBoxStyled = styled(ColorBox)`
   margin-right: 8px;
 `;
 

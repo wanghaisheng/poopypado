@@ -46,6 +46,7 @@ export const Main = (props: Props) => {
   }, [visibleDate]);
 
   const goToSettingPage = () => {
+    setCalendarKey(calendarKey + 1);
     navigation.navigate("Setting");
   };
 

@@ -5,6 +5,7 @@ export interface Poop {
   id: number;
   date: Date;
   type: boolean[];
+  color: boolean[];
   amount: number;
   note: string;
 }
@@ -16,6 +17,7 @@ interface PoopDB {
   id: number;
   date: string;
   type: string;
+  color: string;
   amount: number;
   note: string;
 }
@@ -33,10 +35,20 @@ export const initTable = (db: WebSQLDatabase) => {
           date TEXT NOT NULL, 
           type TEXT,
           amount NUMBER,
+          color TEXT,
           note TEXT
         );
       `
     );
+    // tx.executeSql(
+    //   `ALTER TABLE items
+    //    ADD COLUMN
+    //      color TEXT
+    //   `,
+    //   undefined,
+    //   () => console.log("migrated"),
+    //   (err) => console.log("err: ", err)
+    // );
   });
 };
 
@@ -53,7 +65,8 @@ export const getEntries = (
           (a: PoopDB): Poop => ({
             id: a.id,
             date: new Date(a.date),
-            type: a.type && JSON.parse(a.type),
+            type: a.type ? JSON.parse(a.type) : [],
+            color: a.color ? JSON.parse(a.color) : [],
             amount: a.amount,
             note: a.note,
           })
@@ -97,6 +110,7 @@ export const deleteEntry = (
 const entryToDBEntry = (entry: Omit<Poop, "id">): Omit<PoopDB, "id"> => ({
   date: entry.date.toISOString(),
   type: JSON.stringify(entry.type),
+  color: JSON.stringify(entry.color),
   amount: entry.amount,
   note: entry.note,
 });
@@ -111,14 +125,20 @@ export const addEntry = (
     (tx) => {
       tx.executeSql(
         `
-          INSERT INTO items (date, type, amount, note) 
-          VALUES (?, ?, ?, ?)
+          INSERT INTO items (date, type, color, amount, note) 
+          VALUES (?, ?, ?, ?, ?)
         `,
-        [dbEntry.date, dbEntry.type, dbEntry.amount, dbEntry.note]
+        [
+          dbEntry.date,
+          dbEntry.type,
+          dbEntry.color,
+          dbEntry.amount,
+          dbEntry.note,
+        ]
       );
     },
     (error) => {
-      console.log("error: ", error);
+      console.log("Error adding entry: ", entry, error);
     },
     onComplete
   );
@@ -137,14 +157,24 @@ export const editEntry = (
           UPDATE items 
           SET date = ?,
               type = ?, 
+              color = ?, 
               amount = ?, 
               note = ?
           WHERE id = ?;
         `,
-        [dbEntry.date, dbEntry.type, dbEntry.amount, dbEntry.note, entry.id]
+        [
+          dbEntry.date,
+          dbEntry.type,
+          dbEntry.color,
+          dbEntry.amount,
+          dbEntry.note,
+          entry.id,
+        ]
       );
     },
-    undefined,
+    (error) => {
+      console.log("Error editing entry: ", entry, error);
+    },
     onComplete
   );
 };

@@ -1,6 +1,6 @@
 import format from "date-fns/format";
-import React, { useState } from "react";
-import { Modal, Pressable } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Pressable } from "react-native";
 import { Calendar as RNCalendar } from "react-native-calendars";
 import styled from "styled-components/native";
 
@@ -32,6 +32,13 @@ export const Calendar = (props: Props) => {
     null
   );
   const dateHash = historyDateHash(history);
+
+  /**
+   * Closes entry on calendar reset
+   */
+  useEffect(() => {
+    setSelectedDateHistory(null);
+  }, [calendarKey]);
 
   return (
     <Container>

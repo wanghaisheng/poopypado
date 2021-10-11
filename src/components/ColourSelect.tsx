@@ -1,9 +1,18 @@
 import React from "react";
 import { Text } from "react-native";
 import styled from "styled-components/native";
-import { ColourButton } from "./ColourButton";
 
 import { Card } from "./Card";
+import { ColourButton } from "./ColourButton";
+
+export const poopColourArr = [
+  "red",
+  "purple",
+  "blue",
+  "green",
+  "yellow",
+  "orange",
+];
 
 interface Props {
   colour: boolean[];
@@ -12,8 +21,6 @@ interface Props {
 
 export const ColourSelect = (props: Props) => {
   const { colour, setColour } = props;
-  const poopColourArr = ["red", "purple", "blue", "green", "yellow", "orange"];
-  console.log(colour);
 
   return (
     <Card>
