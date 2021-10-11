@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 
 import { RootStackParamList } from "../../App";
 import { Calendar } from "./Calendar";
-import { Footer } from "./Footer";
 import { Poop, deleteEntry, getEntries } from "./history";
 import { Icon } from "./Icon";
 import { NewEntry } from "./NewEntry";
@@ -37,13 +36,16 @@ export const Main = (props: Props) => {
       title: format(visibleDate, "MMMM yyyy"),
       headerRight: () => (
         <Icon
-          onPress={() => setCalendarKey(calendarKey + 1)}
+          onPress={() => {
+            setCalendarKey(calendarKey + 1);
+            setVisibleDate(new Date());
+          }}
           name="calendar"
           disabled={visibleDate.getMonth() === new Date().getMonth()}
         />
       ),
     });
-  }, [visibleDate]);
+  }, [visibleDate, calendarKey]);
 
   const goToSettingPage = () => {
     setCalendarKey(calendarKey + 1);
