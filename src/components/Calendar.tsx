@@ -1,6 +1,6 @@
 import format from "date-fns/format";
 import React, { useEffect, useState } from "react";
-import { Pressable } from "react-native";
+import { Pressable, Text } from "react-native";
 import { Calendar as RNCalendar } from "react-native-calendars";
 import styled from "styled-components/native";
 
@@ -49,6 +49,8 @@ export const Calendar = (props: Props) => {
           onVisibleMonthChange(new Date(month.dateString));
         }}
         firstDay={1}
+        hideArrows
+        renderHeader={() => <Text />}
         dayComponent={({ date }) => {
           const count = counts[date.dateString];
           return (
@@ -97,6 +99,7 @@ export const Calendar = (props: Props) => {
 };
 
 const Container = styled(Card)`
+  padding-top: 0;
   overflow: hidden;
   background: white;
 `;
