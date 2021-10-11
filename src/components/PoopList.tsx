@@ -44,9 +44,7 @@ export const PoopList = (props: Props) => {
           </Navigation>
         )}
         <Close>
-          <Pressable onPress={onClose}>
-            <Icon name="times" />
-          </Pressable>
+          <Icon name="times" onPress={onClose} />
         </Close>
       </Header>
       <Spacer size="24" />

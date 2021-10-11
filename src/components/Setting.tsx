@@ -1,18 +1,21 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { WebSQLDatabase } from "expo-sqlite";
 import React, { useEffect, useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView } from "react-native";
+import styled from "styled-components/native";
 
 import { RootStackParamList } from "../../App";
 import { AmountSlider } from "./AmountSlider";
+import { Card } from "./Card";
+import { ColourSelect } from "./ColourSelect";
 import { ConfirmationModal } from "./ConfirmationModal";
 import { DatePicker } from "./DatePicker";
 import { Poop, addEntry, editEntry } from "./history";
+import { Icon } from "./Icon";
 import { Note } from "./Note";
 import { Page } from "./Page";
 import { PillButton } from "./PillButton";
 import { TypeSelect } from "./TypeSelect";
-import { ColourSelect } from "./ColourSelect";
 
 interface Props extends NativeStackScreenProps<RootStackParamList, "Setting"> {
   db: WebSQLDatabase;
@@ -41,20 +44,15 @@ export const Setting = (props: Props) => {
   useEffect(() => {
     navigation.setOptions({
       headerBackVisible: false,
-      headerRight: () => {
-        return (
-          <TouchableOpacity
-            onPress={() => {
-              setCanExit(true);
-              setShowConfirmModal(true);
-            }}
-          >
-            <View>
-              <Text>X</Text>
-            </View>
-          </TouchableOpacity>
-        );
-      },
+      headerRight: () => (
+        <Icon
+          name="times"
+          onPress={() => {
+            setCanExit(true);
+            setShowConfirmModal(true);
+          }}
+        />
+      ),
     });
   }, []);
 
@@ -111,9 +109,11 @@ export const Setting = (props: Props) => {
           }}
         />
       </ScrollView>
-      <PillButton onPress={confirm}>
-        {hasExistingEntry ? "Edit" : "Create"} Entry
-      </PillButton>
+      <Card>
+        <PillButton onPress={confirm}>
+          {hasExistingEntry ? "Edit" : "Create"} Entry
+        </PillButton>
+      </Card>
     </Page>
   );
 };
