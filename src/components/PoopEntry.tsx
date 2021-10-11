@@ -18,7 +18,7 @@ interface Props {
 export const PoopEntry = (props: Props) => {
   const { entry, onEdit, onDelete } = props;
 
-  const hasTypeEntry = entry.type.filter((t) => t).length !== 0;
+  const hasTypeEntry = entry.type?.filter((t) => t).length || 0 !== 0;
 
   return (
     <Container>
