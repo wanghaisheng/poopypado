@@ -25,6 +25,7 @@ export const Calendar = (props: Props) => {
     props;
 
   const counts = historyToCounts(history);
+  const currentDate = new Date().getDate();
   const currentMonth = new Date().getMonth() + 1;
   const currentYear = new Date().getFullYear();
 
@@ -66,6 +67,11 @@ export const Calendar = (props: Props) => {
                     hasEntry={!!count}
                     thisMonth={
                       date.month === currentMonth && date.year === currentYear
+                    }
+                    today={
+                      date.day === currentDate &&
+                      date.month === currentMonth &&
+                      date.year === currentYear
                     }
                   >
                     <Count>{count > 0 ? count : ""}</Count>
@@ -127,7 +133,11 @@ const CountBubbleContainer = styled.View`
   align-items: center;
 `;
 
-const CountBubble = styled.View<{ thisMonth: boolean; hasEntry: boolean }>`
+const CountBubble = styled.View<{
+  thisMonth: boolean;
+  hasEntry: boolean;
+  today: boolean;
+}>`
   width: ${(p) => getDaySize(p)};
   height: ${(p) => getDaySize(p)};
   display: flex;
@@ -136,6 +146,7 @@ const CountBubble = styled.View<{ thisMonth: boolean; hasEntry: boolean }>`
   border-radius: 50px;
   background: ${(p) => {
     if (!p.thisMonth) return p.theme.color.grey;
+    if (p.today) return p.theme.color.icon;
     if (!p.hasEntry) return p.theme.color.emptyMain;
     return p.theme.color.main;
   }};
