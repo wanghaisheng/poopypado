@@ -85,7 +85,11 @@ export const PoopEntry = (props: Props) => {
             <Spacer size="8" />
             <Label>Note: </Label>
             <Spacer size="8" />
-            <NoteDisplay>{entry.note}</NoteDisplay>
+            <NoteContainer>
+              {entry.note.split("\n").map((line, i) => (
+                <Text key={i}>{line}</Text>
+              ))}
+            </NoteContainer>
           </>
         ) : undefined}
         <Spacer size="12" />
@@ -111,10 +115,11 @@ export const PoopEntry = (props: Props) => {
 
 const Container = styled.View`
   flex: 1;
-  justify-content: space-between;
 `;
 
-const InfoContainer = styled.View``;
+const InfoContainer = styled.View`
+  flex: 1;
+`;
 
 const InfoRow = styled.View`
   flex-direction: row;
@@ -134,8 +139,8 @@ const ColorBoxStyled = styled(ColorBox)`
   margin-right: 8px;
 `;
 
-const NoteDisplay = styled.Text`
-  min-height: 120px;
+const NoteContainer = styled.ScrollView`
+  flex: 1 1 60px;
   padding: 12px;
   border-radius: 3px;
   background: white;

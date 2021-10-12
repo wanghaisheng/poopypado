@@ -34,14 +34,11 @@ export const Setting = (props: Props) => {
       ? existingEntry.type
       : [false, false, false, false, false, false, false]
   );
-  const [colour, setColour] = useState([
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const [colour, setColour] = useState(
+    hasExistingEntry && Array.isArray(existingEntry?.color)
+      ? existingEntry.color
+      : [false, false, false, false, false, false]
+  );
   const [amount, setAmount] = useState(route.params?.entry.amount ?? 3);
   const [note, setNote] = useState(route.params?.entry.note ?? "");
 
