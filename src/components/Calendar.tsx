@@ -1,6 +1,6 @@
 import format from "date-fns/format";
 import React, { useEffect, useState } from "react";
-import { Pressable, Text } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { Calendar as RNCalendar } from "react-native-calendars";
 import styled from "styled-components/native";
 
@@ -29,10 +29,10 @@ export const Calendar = (props: Props) => {
   const currentMonth = new Date().getMonth() + 1;
   const currentYear = new Date().getFullYear();
 
+  const dateHash = historyDateHash(history);
   const [selectedDateHistory, setSelectedDateHistory] = useState<Poop[] | null>(
     null
   );
-  const dateHash = historyDateHash(history);
 
   /**
    * Closes entry on calendar reset
@@ -42,71 +42,75 @@ export const Calendar = (props: Props) => {
   }, [calendarKey]);
 
   return (
-    <Container>
-      <RNCalendar
-        key={calendarKey}
-        enableSwipeMonths
-        onMonthChange={(month) => {
-          onVisibleMonthChange(new Date(month.dateString));
-        }}
-        firstDay={1}
-        hideArrows
-        renderHeader={() => <Text />}
-        dayComponent={({ date }) => {
-          const count = counts[date.dateString];
-          return (
-            <Pressable
-              onPress={() => {
-                setSelectedDateHistory(dateHash[date.dateString] ?? null);
-              }}
-            >
-              <DayContainer>
-                <DayLabel>{date.day}</DayLabel>
-                <CountBubbleContainer>
-                  <CountBubble
-                    hasEntry={!!count}
-                    thisMonth={
-                      date.month === currentMonth && date.year === currentYear
-                    }
-                    today={
-                      date.day === currentDate &&
-                      date.month === currentMonth &&
-                      date.year === currentYear
-                    }
-                  >
-                    <Count>{count > 0 ? count : ""}</Count>
-                  </CountBubble>
-                </CountBubbleContainer>
-              </DayContainer>
-            </Pressable>
-          );
-        }}
-      />
+    <View>
+      <CalendarContainer>
+        <RNCalendar
+          key={calendarKey}
+          enableSwipeMonths
+          onMonthChange={(month) => {
+            onVisibleMonthChange(new Date(month.dateString));
+          }}
+          firstDay={1}
+          hideArrows
+          renderHeader={() => <Text />}
+          dayComponent={({ date }) => {
+            const count = counts[date.dateString];
+            return (
+              <Pressable
+                onPress={() => {
+                  setSelectedDateHistory(dateHash[date.dateString] ?? null);
+                }}
+              >
+                <DayContainer>
+                  <DayLabel>{date.day}</DayLabel>
+                  <CountBubbleContainer>
+                    <CountBubble
+                      hasEntry={!!count}
+                      thisMonth={
+                        date.month === currentMonth && date.year === currentYear
+                      }
+                      today={
+                        date.day === currentDate &&
+                        date.month === currentMonth &&
+                        date.year === currentYear
+                      }
+                    >
+                      <Count>{count > 0 ? count : ""}</Count>
+                    </CountBubble>
+                  </CountBubbleContainer>
+                </DayContainer>
+              </Pressable>
+            );
+          }}
+        />
+      </CalendarContainer>
+
       {selectedDateHistory && (
-        <EntryContainer>
-          <PoopList
-            history={selectedDateHistory}
-            onClose={() => {
-              setSelectedDateHistory(null);
-            }}
-            onEdit={(entry) => {
-              setSelectedDateHistory(null);
-              onEdit(entry);
-            }}
-            onDelete={(id) => {
-              onDelete(id);
-              setSelectedDateHistory(null);
-            }}
-          />
-        </EntryContainer>
+        <AbsoluteContainer>
+          <EntryContainer>
+            <PoopList
+              history={selectedDateHistory}
+              onClose={() => {
+                setSelectedDateHistory(null);
+              }}
+              onEdit={(entry) => {
+                setSelectedDateHistory(null);
+                onEdit(entry);
+              }}
+              onDelete={(id) => {
+                onDelete(id);
+                setSelectedDateHistory(null);
+              }}
+            />
+          </EntryContainer>
+        </AbsoluteContainer>
       )}
-    </Container>
+    </View>
   );
 };
 
-const Container = styled(Card)`
+const CalendarContainer = styled(Card)`
   padding-top: 0;
-  overflow: hidden;
   background: white;
 `;
 
@@ -156,10 +160,17 @@ const Count = styled.Text`
   color: white;
 `;
 
-const EntryContainer = styled.View`
+const AbsoluteContainer = styled.View`
   position: absolute;
-  height: 100%;
   width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+`;
+
+const EntryContainer = styled.View`
+  width: 92%;
+  height: 92%;
 `;
 
 /**

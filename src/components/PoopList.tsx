@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Pressable } from "react-native";
+import { Pressable, ScrollView } from "react-native";
 import styled from "styled-components/native";
 
 import { Card } from "./Card";
@@ -48,15 +48,13 @@ export const PoopList = (props: Props) => {
         </Close>
       </Header>
       <Spacer size="24" />
-
       <PoopEntry entry={history[index]} onEdit={onEdit} onDelete={onDelete} />
     </Container>
   );
 };
 
 const Container = styled(Card)`
-  width: 100%;
-  height: 100%;
+  flex: 1;
 `;
 
 const Header = styled.View``;
