@@ -1,5 +1,4 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { format } from "date-fns";
 import { WebSQLDatabase } from "expo-sqlite";
 import React, { useEffect, useState } from "react";
 
@@ -7,6 +6,7 @@ import { RootStackParamList } from "../../App";
 import { Calendar } from "./Calendar";
 import { Poop, deleteEntry, getEntries } from "./history";
 import { Icon } from "./Icon";
+import { MonthHeader } from "./MonthHeader";
 import { NewEntry } from "./NewEntry";
 import { Page } from "./Page";
 
@@ -33,7 +33,7 @@ export const Main = (props: Props) => {
 
   useEffect(() => {
     navigation.setOptions({
-      title: format(visibleDate, "MMMM yyyy"),
+      headerTitle: () => <MonthHeader date={visibleDate} />,
       headerRight: () => (
         <Icon
           onPress={() => {
