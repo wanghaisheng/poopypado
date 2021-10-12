@@ -1,4 +1,4 @@
-import format from "date-fns/format";
+import { format, isFuture, isThisMonth, isThisYear, isToday } from "date-fns";
 import React, { useEffect, useState } from "react";
 import { Pressable, Text, View } from "react-native";
 import { Calendar as RNCalendar } from "react-native-calendars";
@@ -52,9 +52,13 @@ export const Calendar = (props: Props) => {
           }}
           firstDay={1}
           hideArrows
+          hideExtraDays
           renderHeader={() => <Text />}
           dayComponent={({ date }) => {
             const count = counts[date.dateString];
+
+            const dayDate = new Date(date.dateString);
+
             return (
               <Pressable
                 onPress={() => {
@@ -66,14 +70,9 @@ export const Calendar = (props: Props) => {
                   <CountBubbleContainer>
                     <CountBubble
                       hasEntry={!!count}
-                      thisMonth={
-                        date.month === currentMonth && date.year === currentYear
-                      }
-                      today={
-                        date.day === currentDate &&
-                        date.month === currentMonth &&
-                        date.year === currentYear
-                      }
+                      thisMonth={isThisYear(dayDate) && isThisMonth(dayDate)}
+                      today={isToday(dayDate)}
+                      future={isFuture(dayDate)}
                     >
                       <Count>{count > 0 ? count : ""}</Count>
                     </CountBubble>
@@ -123,10 +122,10 @@ const DayLabel = styled.Text`
   font-size: 10px;
 `;
 
-const getDaySize = (p: { thisMonth: boolean; hasEntry: boolean }): string => {
-  if (!p.thisMonth) return "16px";
-  if (!p.hasEntry) return "16px";
-  return "30px";
+const getDaySize = (p: { future: boolean; hasEntry: boolean }): string => {
+  if (p.hasEntry) return "30px";
+  if (p.future) return "12px";
+  return "25px";
 };
 
 const CountBubbleContainer = styled.View`
@@ -137,9 +136,10 @@ const CountBubbleContainer = styled.View`
 `;
 
 const CountBubble = styled.View<{
-  thisMonth: boolean;
   hasEntry: boolean;
+  thisMonth: boolean;
   today: boolean;
+  future: boolean;
 }>`
   width: ${(p) => getDaySize(p)};
   height: ${(p) => getDaySize(p)};
@@ -148,10 +148,15 @@ const CountBubble = styled.View<{
   align-items: center;
   border-radius: 50px;
   background: ${(p) => {
-    if (!p.thisMonth) return p.theme.color.grey;
     if (p.today) return p.theme.color.icon;
-    if (!p.hasEntry) return p.theme.color.emptyMain;
-    return p.theme.color.main;
+
+    if (p.thisMonth) {
+      if (p.hasEntry) return p.theme.color.main;
+      return p.theme.color.emptyMain;
+    } else {
+      if (p.hasEntry) return "#7297CD";
+      return "#C3D0E3";
+    }
   }};
 `;
 
