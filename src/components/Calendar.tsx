@@ -25,9 +25,6 @@ export const Calendar = (props: Props) => {
     props;
 
   const counts = historyToCounts(history);
-  const currentDate = new Date().getDate();
-  const currentMonth = new Date().getMonth() + 1;
-  const currentYear = new Date().getFullYear();
 
   const dateHash = historyDateHash(history);
   const [selectedDateHistory, setSelectedDateHistory] = useState<Poop[] | null>(
