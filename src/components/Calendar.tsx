@@ -54,7 +54,7 @@ export const Calendar = (props: Props) => {
           dayComponent={({ date }) => {
             const count = counts[date.dateString];
 
-            const dayDate = new Date(date.dateString);
+            const dayDate = new Date(`${date.dateString}T00:00`);
 
             return (
               <Pressable
