@@ -107,6 +107,7 @@ export const Calendar = (props: Props) => {
 
 const CalendarContainer = styled(Card)`
   margin: 12px 15px 0 15px;
+  background: white;
 `;
 
 const DayContainer = styled.View`
@@ -162,6 +163,7 @@ const Count = styled.Text`
   color: white;
   font-weight: 700;
   font-size: 13px;
+  text-align: center;
 `;
 
 const AbsoluteContainer = styled.View`
