@@ -18,10 +18,10 @@ export const MonthHeader = (props: Props) => {
 };
 
 const Month = styled.Text<{ thisMonth: boolean }>`
-  font-size: 26px;
+  font-size: 25px;
   color: ${(p) => (p.thisMonth ? p.theme.color.main : "#7297CD")};
 `;
 
 const Year = styled.Text`
-  font-size: 26px;
+  font-size: 24px;
 `;
