@@ -57,5 +57,5 @@ const TypeName = styled.Text`
 
 const TypeDescription = styled.Text`
   color: #4e4e55;
-  font-size: 15px;
+  font-size: 14px;
 `;

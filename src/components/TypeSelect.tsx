@@ -11,16 +11,19 @@ interface Props {
 }
 
 export const typeInfoArr = [
-  { title: "Type 1", description: "Small, hard and difficult to pass" },
-  { title: "Type  2", description: "Sausage-shaped but lumpy" },
-  { title: "Type  3", description: "Sausage-shaped but cracked" },
-  { title: "Type  4", description: "Sausage-shaped, smooth and soft" },
-  { title: "Type  5", description: "Small and soft with defined edges" },
+  { title: "Type 1", description: "Small, hard, separate lumps" },
+  { title: "Type  2", description: "Sausage-shaped and lumpy" },
+  {
+    title: "Type  3",
+    description: "Sausage-shaped with cracks over the surface",
+  },
+  { title: "Type  4", description: "Smooth and soft, Sausage-shaped, " },
+  { title: "Type  5", description: "Small and soft blobs with defined edges" },
   {
     title: "Type  6",
-    description: "Very small, fluffy/mushy pieces with ragged edges",
+    description: "Fluffy/mushy pieces with ragged edges",
   },
-  { title: "Type  7", description: "watery with no solid pieces" },
+  { title: "Type  7", description: "Watery consistency with no solid pieces" },
 ];
 
 export const TypeSelect = (props: Props) => {

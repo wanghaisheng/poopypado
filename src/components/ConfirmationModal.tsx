@@ -21,9 +21,9 @@ export const ConfirmationModal = (props: Props) => {
           <Prompt>Exit without saving?</Prompt>
           <ButtonGroup>
             <SquareButton color="icon" onPress={onConfirm}>
-              YES
+              Yes
             </SquareButton>
-            <SquareButton onPress={onCancel}>NO</SquareButton>
+            <SquareButton onPress={onCancel}>No</SquareButton>
           </ButtonGroup>
         </ThickCard>
       </Overlay>
@@ -33,21 +33,23 @@ export const ConfirmationModal = (props: Props) => {
 
 const Overlay = styled(BlurView)`
   flex: 1;
-  justify-content: center;
+  padding-top: 50%;
 `;
 
 const ThickCard = styled(Card)`
-  padding-top: 90px;
-  padding-bottom: 90px;
+  padding: 80px 0;
+  margin: 0 25px;
+  align-items: center;
 `;
 
 const Prompt = styled.Text`
-  font-size: 30px;
+  font-size: 25px;
   text-align: center;
-  margin-bottom: 45px;
+  margin-bottom: 25px;
 `;
 
 const ButtonGroup = styled.View`
+  width: 80%;
   flex-direction: row;
   justify-content: space-around;
 `;

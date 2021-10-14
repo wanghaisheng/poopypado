@@ -23,7 +23,7 @@ export const SquareButton: FC<Props> = (props) => {
 
 const Container = styled.View<{ color?: ThemeColor }>`
   background: ${(p) => p.theme.color[p.color ?? "main"]};
-  padding: 12px 36px;
+  padding: 10px 32px;
   border-radius: 3px;
   align-self: center;
 `;
