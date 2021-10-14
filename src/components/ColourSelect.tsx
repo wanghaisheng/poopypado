@@ -6,12 +6,12 @@ import { Card } from "./Card";
 import { ColourButton } from "./ColourButton";
 
 export const poopColourArr = [
-  "red",
-  "purple",
-  "blue",
-  "green",
-  "yellow",
-  "orange",
+  "#E4BD81",
+  "#C1934D",
+  "#886531",
+  "#5F442C",
+  "#565B48",
+  "#423B38",
 ];
 
 interface Props {
