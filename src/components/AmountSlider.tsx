@@ -18,22 +18,24 @@ export const AmountSlider = (props: Props) => {
   return (
     <Card>
       <Text>Select an Amount</Text>
-      <Slider
-        value={amount}
-        onValueChange={setAmount}
-        minimumValue={1}
-        maximumValue={5}
-        step={1}
-        minimumTrackTintColor={theme.color.main}
-        thumbTintColor={theme.color.main}
-      />
-      <Labels>
-        <Text>XS</Text>
-        <Text>S</Text>
-        <Text>M</Text>
-        <Text>L</Text>
-        <Text>XL</Text>
-      </Labels>
+      <Content>
+        <Slider
+          value={amount}
+          onValueChange={setAmount}
+          minimumValue={1}
+          maximumValue={5}
+          step={1}
+          minimumTrackTintColor={theme.color.main}
+          thumbTintColor={theme.color.main}
+        />
+        <Labels>
+          <Text>XS</Text>
+          <Text>S</Text>
+          <Text>M</Text>
+          <Text>L</Text>
+          <Text>XL</Text>
+        </Labels>
+      </Content>
     </Card>
   );
 };
@@ -42,4 +44,8 @@ const Labels = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+`;
+
+const Content = styled.View`
+  margin: 10px 0 0 0;
 `;

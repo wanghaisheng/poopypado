@@ -30,4 +30,5 @@ const TextArea = styled.TextInput`
   padding: 12px;
   border: 1px solid grey;
   border-radius: 3px;
+  margin: 10px 0 0 0;
 `;

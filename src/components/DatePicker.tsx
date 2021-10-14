@@ -67,4 +67,5 @@ const DateTimeContainer = styled.View`
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
+  margin: 10px 0 0 0;
 `;

@@ -3,6 +3,7 @@ import { Text, View } from "react-native";
 
 import { Card } from "./Card";
 import { TypeButton } from "./TypeButton";
+import styled from "styled-components/native";
 
 interface Props {
   type: boolean[];
@@ -27,8 +28,8 @@ export const TypeSelect = (props: Props) => {
 
   return (
     <Card>
-      <View>
-        <Text>Select Type(s)</Text>
+      <Text>Select Type(s)</Text>
+      <ButtonContainer>
         {typeInfoArr.map((typeInfo, index) => (
           <TypeButton
             selected={type[index]}
@@ -43,7 +44,11 @@ export const TypeSelect = (props: Props) => {
             key={index}
           />
         ))}
-      </View>
+      </ButtonContainer>
     </Card>
   );
 };
+
+const ButtonContainer = styled.View`
+  margin: 10px 0 0 0;
+`;

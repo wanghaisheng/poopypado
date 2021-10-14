@@ -24,33 +24,30 @@ export const ColourSelect = (props: Props) => {
 
   return (
     <Card>
-      <Content>
-        <Text>Select Colour(s)</Text>
-        <Buttons>
-          {poopColourArr.map((poopColour, index) => (
-            <ColourButton
-              buttonColour={poopColour}
-              key={index}
-              onPress={() => {
-                const newColour = [...colour];
-                newColour[index]
-                  ? (newColour[index] = false)
-                  : (newColour[index] = true);
-                setColour(newColour);
-              }}
-              selected={colour[index]}
-            />
-          ))}
-        </Buttons>
-      </Content>
+      <Text>Select Colour(s)</Text>
+      <Buttons>
+        {poopColourArr.map((poopColour, index) => (
+          <ColourButton
+            buttonColour={poopColour}
+            key={index}
+            onPress={() => {
+              const newColour = [...colour];
+              newColour[index]
+                ? (newColour[index] = false)
+                : (newColour[index] = true);
+              setColour(newColour);
+            }}
+            selected={colour[index]}
+          />
+        ))}
+      </Buttons>
     </Card>
   );
 };
-
-const Content = styled.View``;
 
 const Buttons = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: 10px 0 0 0;
 `;
