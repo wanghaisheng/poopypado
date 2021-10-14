@@ -107,6 +107,8 @@ export const Calendar = (props: Props) => {
 
 const CalendarContainer = styled(Card)`
   margin: 12px 15px 0 15px;
+  padding-bottom: 30px;
+  padding-top: 0;
   background: white;
 `;
 

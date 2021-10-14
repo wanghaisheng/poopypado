@@ -16,6 +16,7 @@ export const NewEntry = (props: Props) => {
     <Container>
       <InstructionContainer>
         <Intruction>
+          <BoldText>Hint: </BoldText>
           For more information click on a date with an existing entry!
         </Intruction>
       </InstructionContainer>
@@ -42,4 +43,9 @@ const Intruction = styled.Text`
   font-size: 15px;
   margin-bottom: 8px;
   text-align: center;
+  color: ${(p) => p.theme.color.icon};
+`;
+
+const BoldText = styled.Text`
+  font-weight: 700;
 `;
