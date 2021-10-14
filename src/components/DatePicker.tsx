@@ -1,7 +1,7 @@
 import DateTimePicker from "@react-native-community/datetimepicker";
 import format from "date-fns/format";
 import React, { useState } from "react";
-import { Button, Platform, Text, TouchableOpacity, View } from "react-native";
+import { Platform, Text, TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
 
 import { Card } from "./Card";
@@ -52,7 +52,13 @@ export const DatePicker = (props: Props) => {
         </View>
       </DateTimeContainer>
       {show && (
-        <DateTimePicker value={date} mode={mode} is24Hour onChange={onUpdate} />
+        <DateTimePicker
+          value={date}
+          mode={mode}
+          is24Hour
+          onChange={onUpdate}
+          maximumDate={new Date()}
+        />
       )}
     </Card>
   );
