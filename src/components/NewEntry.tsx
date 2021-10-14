@@ -15,10 +15,12 @@ export const NewEntry = (props: Props) => {
   return (
     <Container>
       <InstructionContainer>
-        <Intruction>Hint: Click on a date for more information</Intruction>
+        <Intruction>
+          For more information click on a date with an existing entry!
+        </Intruction>
       </InstructionContainer>
       <Spacer size="8" />
-      <PillButton onPress={onNewEntryPress}>New Poop</PillButton>
+      <PillButton onPress={onNewEntryPress}>New Entry</PillButton>
     </Container>
   );
 };
