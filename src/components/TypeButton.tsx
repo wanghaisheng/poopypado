@@ -36,7 +36,7 @@ const Container = styled.View<{ selected: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 4px 8px 10px 4px;
+  padding: 6px 8px 10px 7px;
   
 `;
 
@@ -50,12 +50,12 @@ const TextContainer = styled.View`
   width: 75%;
 `;
 const TypeName = styled.Text`
-  font-weight: bold;
+  font-weight: 700;
   color: #4e4e55;
-  font-size: 17px;
+  font-size: 15px;
 `;
 
 const TypeDescription = styled.Text`
   color: #4e4e55;
-  font-size: 14px;
+  font-size: 15px;
 `;

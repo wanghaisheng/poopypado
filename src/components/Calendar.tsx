@@ -106,7 +106,7 @@ export const Calendar = (props: Props) => {
 };
 
 const CalendarContainer = styled(Card)`
-  background: white;
+  margin: 12px 15px 0 15px;
 `;
 
 const DayContainer = styled.View`
@@ -116,11 +116,12 @@ const DayContainer = styled.View`
 
 const DayLabel = styled.Text`
   text-align: center;
-  font-size: 10px;
+  font-size: 11px;
+  font-weight: 700;
 `;
 
 const getDaySize = (p: { future: boolean; hasEntry: boolean }): string => {
-  if (p.hasEntry) return "30px";
+  if (p.hasEntry) return "31px";
   if (p.future) return "12px";
   return "25px";
 };
@@ -159,6 +160,8 @@ const CountBubble = styled.View<{
 
 const Count = styled.Text`
   color: white;
+  font-weight: 700;
+  font-size: 13px;
 `;
 
 const AbsoluteContainer = styled.View`

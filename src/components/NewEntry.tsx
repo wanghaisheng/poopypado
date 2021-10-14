@@ -14,21 +14,30 @@ export const NewEntry = (props: Props) => {
 
   return (
     <Container>
-      <Intruction>Hint: Click on a date for more information</Intruction>
+      <InstructionContainer>
+        <Intruction>Hint: Click on a date for more information</Intruction>
+      </InstructionContainer>
       <Spacer size="8" />
       <PillButton onPress={onNewEntryPress}>New Poop</PillButton>
     </Container>
   );
 };
 
+const InstructionContainer = styled.View`
+  height: 65px;
+  width: 80%;
+`;
+
 const Container = styled(Card)`
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 12px 15px;
 `;
 
 const Intruction = styled.Text`
-  font-size: 16px;
+  font-size: 15px;
   margin-bottom: 8px;
+  text-align: center;
 `;
