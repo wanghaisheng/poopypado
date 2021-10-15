@@ -13,9 +13,11 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
+      "bundleIdentifier": "com.poopipado.poopipado",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.poopipado.poopipado",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#3D3F62"
