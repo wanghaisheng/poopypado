@@ -9,6 +9,7 @@ import { poopColourArr } from "./ColourSelect";
 import { Poop } from "./history";
 import { Icon } from "./Icon";
 import { Spacer } from "./Spacer";
+import { TypeImage } from "./TypeButton";
 import { typeInfoArr } from "./TypeSelect";
 
 interface Props {
@@ -28,7 +29,7 @@ export const PoopEntry = (props: Props) => {
       <InfoContainer>
         <InfoRow>
           <Label>Time: </Label>
-          <Text>{format(entry.date, "HH:mm dd/MM/yyyy")}</Text>
+          <Text>{format(entry.date, "dd MMM yyyy, h:mm a")}</Text>
         </InfoRow>
 
         {hasTypeEntry && (
@@ -36,14 +37,18 @@ export const PoopEntry = (props: Props) => {
             <Spacer size="8" />
             <InfoRow>
               <Label>Type: </Label>
-              <Text>
-                {entry.type
-                  .map((selected, i) => {
-                    return selected ? `${typeInfoArr[i].title}` : "";
-                  })
-                  .filter((info) => !!info)
-                  .join(", ")}
-              </Text>
+              <Row>
+                {entry.type.map((selected, i) => {
+                  if (!selected) return undefined;
+                  const typeInfo = typeInfoArr[i];
+                  return (
+                    <TypeImageStyled
+                      key={typeInfo.title}
+                      source={typeInfo.imgSource}
+                    />
+                  );
+                })}
+              </Row>
             </InfoRow>
           </>
         )}
@@ -53,10 +58,9 @@ export const PoopEntry = (props: Props) => {
             <Spacer size="8" />
             <InfoRow>
               <Label>Color: </Label>
-              <ColorBoxContainer>
+              <Row>
                 {entry.color.map((selected, i) => {
                   if (!selected) return undefined;
-
                   const poopColor = poopColourArr[i];
                   return (
                     <ColorBoxStyled
@@ -65,7 +69,7 @@ export const PoopEntry = (props: Props) => {
                     />
                   );
                 })}
-              </ColorBoxContainer>
+              </Row>
             </InfoRow>
           </>
         )}
@@ -82,8 +86,6 @@ export const PoopEntry = (props: Props) => {
 
         {entry.note ? (
           <>
-            <Spacer size="8" />
-            <Label>Note: </Label>
             <Spacer size="8" />
             <NoteContainer>
               {entry.note.split("\n").map((line, i) => (
@@ -131,12 +133,21 @@ const Label = styled.Text`
   margin-right: 8px;
 `;
 
-const ColorBoxContainer = styled.View`
+const Row = styled.View`
   flex-direction: row;
+  flex-wrap: wrap;
+`;
+
+const TypeImageStyled = styled(TypeImage)`
+  margin-right: 4px;
+  width: 30px;
+  height: 30px;
 `;
 
 const ColorBoxStyled = styled(ColorBox)`
-  margin-right: 8px;
+  margin-right: 4px;
+  height: 30px;
+  width: 30px;
 `;
 
 const NoteContainer = styled.ScrollView`

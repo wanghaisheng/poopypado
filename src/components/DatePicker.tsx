@@ -41,13 +41,13 @@ export const DatePicker = (props: Props) => {
       <Text>Select a Time</Text>
       <DateTimeContainer>
         <View>
-          <TouchableOpacity onPress={showTimepicker}>
-            <DateTimeText>{format(date, "HH:mm a")}</DateTimeText>
+          <TouchableOpacity onPress={showDatepicker}>
+            <DateTimeText>{format(date, "yyyy MMM dd")}</DateTimeText>
           </TouchableOpacity>
         </View>
         <View>
-          <TouchableOpacity onPress={showDatepicker}>
-            <DateTimeText>{format(date, "yyyy MMM dd")}</DateTimeText>
+          <TouchableOpacity onPress={showTimepicker}>
+            <DateTimeText>{format(date, "HH:mm a")}</DateTimeText>
           </TouchableOpacity>
         </View>
       </DateTimeContainer>

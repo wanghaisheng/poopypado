@@ -40,7 +40,7 @@ const Container = styled.View<{ selected: boolean }>`
   padding: 6px 8px 10px 7px;
 `;
 
-const TypeImage = styled.Image`
+export const TypeImage = styled.Image`
   width: 65px;
   height: 65px;
   resize-mode: contain;
