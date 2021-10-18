@@ -7,7 +7,7 @@ interface Props {}
 export const Footer = (props: Props) => {
   return (
     <Container>
-      <Text>FOOTER</Text>
+      <Text></Text>
     </Container>
   );
 };

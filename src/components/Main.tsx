@@ -10,6 +10,7 @@ import { MonthHeader } from "./MonthHeader";
 import { NewEntry } from "./NewEntry";
 import { Page } from "./Page";
 import styled from "styled-components/native";
+import { Footer } from "./Footer";
 
 interface Props extends NativeStackScreenProps<RootStackParamList, "Main"> {
   db: WebSQLDatabase;
@@ -75,6 +76,7 @@ export const Main = (props: Props) => {
         }}
       />
       <NewEntry onNewEntryPress={goToSettingPage} />
+      <Footer />
     </Page>
   );
 };

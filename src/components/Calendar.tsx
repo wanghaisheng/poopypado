@@ -1,7 +1,7 @@
 import { format, isFuture, isThisMonth, isThisYear, isToday } from "date-fns";
 import React, { useEffect, useState } from "react";
 import { Pressable, Text, View } from "react-native";
-import { Calendar as RNCalendar } from "react-native-calendars";
+import { CalendarList } from "react-native-calendars";
 import styled from "styled-components/native";
 
 import { Card } from "./Card";
@@ -41,11 +41,13 @@ export const Calendar = (props: Props) => {
   return (
     <View>
       <CalendarContainer>
-        <RNCalendar
+        <CalendarList
           key={calendarKey}
-          enableSwipeMonths
-          onMonthChange={(month) => {
-            onVisibleMonthChange(new Date(month.dateString));
+          futureScrollRange={0}
+          onVisibleMonthsChange={(months) => {
+            const lastIndex = months.length - 1;
+            onVisibleMonthChange(new Date(months[lastIndex].dateString));
+            console.log(months);
           }}
           firstDay={1}
           hideArrows
@@ -62,7 +64,7 @@ export const Calendar = (props: Props) => {
                   setSelectedDateHistory(dateHash[date.dateString] ?? null);
                 }}
               >
-                <DayContainer>
+                <DateContainer>
                   <DayLabel>{date.day}</DayLabel>
                   <CountBubbleContainer>
                     <CountBubble
@@ -74,7 +76,7 @@ export const Calendar = (props: Props) => {
                       <Count>{count > 0 ? count : ""}</Count>
                     </CountBubble>
                   </CountBubbleContainer>
-                </DayContainer>
+                </DateContainer>
               </Pressable>
             );
           }}
@@ -107,12 +109,12 @@ export const Calendar = (props: Props) => {
 
 const CalendarContainer = styled(Card)`
   margin: 12px 15px 0 15px;
-  padding-bottom: 30px;
-  padding-top: 0;
+  padding-bottom: 35px;
   background: white;
+  height: 400px;
 `;
 
-const DayContainer = styled.View`
+const DateContainer = styled.View`
   height: 45px;
   width: 45px;
 `;
