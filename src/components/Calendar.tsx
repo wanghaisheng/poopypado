@@ -14,6 +14,7 @@ import styled from "styled-components/native";
 import { Card } from "./Card";
 import { Poop, historyDateHash } from "./history";
 import { PoopList } from "./PoopList";
+import { theme } from "./theme";
 
 interface Props {
   history: Poop[];
@@ -86,6 +87,11 @@ export const Calendar = (props: Props) => {
               </Pressable>
             );
           }}
+          theme={{
+            calendarBackground: theme.color.foreground,
+            textDayHeaderFontSize: 14,
+          }}
+          showScrollIndicator={false}
         />
       </CalendarContainer>
 
@@ -115,9 +121,8 @@ export const Calendar = (props: Props) => {
 
 const CalendarContainer = styled(Card)`
   margin: 12px 15px 0 15px;
-  padding-bottom: 35px;
-  background: white;
-  height: 400px;
+  background: ${(p) => p.theme.color.foreground};
+  height: 390px;
 `;
 
 const DateContainer = styled.View`

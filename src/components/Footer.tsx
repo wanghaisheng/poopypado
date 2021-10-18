@@ -13,7 +13,7 @@ export const Footer = (props: Props) => {
     <Container>
       <HelpContainer>
         <Pressable>
-          <AntDesign name="infocirlce" size={40} color={theme.color.icon} />
+          <AntDesign name="questioncircle" size={39} color={theme.color.icon} />
         </Pressable>
       </HelpContainer>
     </Container>
