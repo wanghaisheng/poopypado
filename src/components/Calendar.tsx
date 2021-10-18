@@ -1,4 +1,11 @@
-import { format, isFuture, isThisMonth, isThisYear, isToday } from "date-fns";
+import {
+  format,
+  isFuture,
+  isThisMonth,
+  isThisYear,
+  isToday,
+  setHours,
+} from "date-fns";
 import React, { useEffect, useState } from "react";
 import { Pressable, Text, View } from "react-native";
 import { Calendar as RNCalendar } from "react-native-calendars";
@@ -54,8 +61,7 @@ export const Calendar = (props: Props) => {
           dayComponent={({ date }) => {
             const count = counts[date.dateString];
 
-            const dayDate = new Date(`${date.dateString}T00:00`);
-
+            const dayDate = setHours(new Date(date.dateString), 0);
             return (
               <Pressable
                 onPress={() => {
