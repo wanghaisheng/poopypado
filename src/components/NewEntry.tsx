@@ -16,11 +16,11 @@ export const NewEntry = (props: Props) => {
     <Container>
       <InstructionContainer>
         <Intruction>
-          <BoldText>Hint: </BoldText>
-          For more information click on a date with an existing entry!
+          <BoldText>Hint:</BoldText> Click on a date with an existing entry for
+          more information!
         </Intruction>
       </InstructionContainer>
-      <Spacer size="8" />
+      <Spacer size="9" />
       <PillButton onPress={onNewEntryPress}>New Entry</PillButton>
     </Container>
   );

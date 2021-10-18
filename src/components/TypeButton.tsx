@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { ImageSourcePropType, TouchableOpacity } from "react-native";
 import { Text } from "react-native";
 import styled from "styled-components/native";
+import { Spacer } from "./Spacer";
 
 interface Props {
   onPress: () => void;
@@ -17,12 +18,9 @@ export const TypeButton: FC<Props> = (props) => {
     <TouchableOpacity onPress={onPress}>
       <Container selected={selected}>
         <TextContainer>
-          <TypeName>
-            <Text>{title}</Text>
-          </TypeName>
-          <TypeDescription>
-            <Text>{description}</Text>
-          </TypeDescription>
+          <TypeName>{title}</TypeName>
+          <Spacer size="2" />
+          <TypeDescription>{description}</TypeDescription>
         </TextContainer>
         <TypeImage source={imgSource} />
       </Container>
@@ -37,22 +35,23 @@ const Container = styled.View<{ selected: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 6px 8px 10px 7px;
+  padding: 6px 8px 10px 10px;
 `;
 
 export const TypeImage = styled.Image`
   width: 65px;
   height: 65px;
   resize-mode: contain;
+  margin-right: 8px;
 `;
 
 const TextContainer = styled.View`
-  width: 75%;
+  width: 72%;
 `;
 const TypeName = styled.Text`
   font-weight: 700;
   color: #4e4e55;
-  font-size: 15px;
+  font-size: 14px;
 `;
 
 const TypeDescription = styled.Text`

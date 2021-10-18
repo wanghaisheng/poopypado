@@ -125,7 +125,7 @@ const DayLabel = styled.Text`
 
 const getDaySize = (p: { future: boolean; hasEntry: boolean }): string => {
   if (p.hasEntry) return "31px";
-  if (p.future) return "12px";
+  if (p.future) return "10px";
   return "25px";
 };
 
@@ -153,6 +153,7 @@ const CountBubble = styled.View<{
 
     if (p.thisMonth) {
       if (p.hasEntry) return p.theme.color.main;
+      if (p.future) return "#ECB7B7";
       return p.theme.color.emptyMain;
     } else {
       if (p.hasEntry) return "#7297CD";
