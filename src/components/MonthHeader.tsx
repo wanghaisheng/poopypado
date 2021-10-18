@@ -1,6 +1,6 @@
 import { format, isThisMonth } from "date-fns";
 import React from "react";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 import styled from "styled-components/native";
 
 interface Props {
@@ -10,12 +10,18 @@ interface Props {
 export const MonthHeader = (props: Props) => {
   const { date } = props;
   return (
-    <Text>
+    <Container>
       <Month thisMonth={isThisMonth(date)}>{format(date, "MMMM")} </Month>
       <Year>{format(date, "yyyy")}</Year>
-    </Text>
+    </Container>
   );
 };
+
+const Container = styled.View`
+  flex-direction: row;
+  align-items: baseline;
+  padding-left: 17px;
+`;
 
 const Month = styled.Text<{ thisMonth: boolean }>`
   font-size: 25px;

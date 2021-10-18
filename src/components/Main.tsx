@@ -9,6 +9,7 @@ import { Icon } from "./Icon";
 import { MonthHeader } from "./MonthHeader";
 import { NewEntry } from "./NewEntry";
 import { Page } from "./Page";
+import styled from "styled-components/native";
 
 interface Props extends NativeStackScreenProps<RootStackParamList, "Main"> {
   db: WebSQLDatabase;
@@ -35,14 +36,16 @@ export const Main = (props: Props) => {
     navigation.setOptions({
       headerTitle: () => <MonthHeader date={visibleDate} />,
       headerRight: () => (
-        <Icon
-          onPress={() => {
-            setCalendarKey(calendarKey + 1);
-            setVisibleDate(new Date());
-          }}
-          name="calendar"
-          disabled={visibleDate.getMonth() === new Date().getMonth()}
-        />
+        <IconContainer>
+          <Icon
+            onPress={() => {
+              setCalendarKey(calendarKey + 1);
+              setVisibleDate(new Date());
+            }}
+            name="calendar"
+            disabled={visibleDate.getMonth() === new Date().getMonth()}
+          />
+        </IconContainer>
       ),
     });
   }, [visibleDate, calendarKey]);
@@ -75,3 +78,7 @@ export const Main = (props: Props) => {
     </Page>
   );
 };
+
+const IconContainer = styled.View`
+  padding-right: 16px;
+`;

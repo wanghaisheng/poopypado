@@ -5,7 +5,7 @@ export const theme: DefaultTheme = {
     main: "#E76262",
     emptyMain: "#EAA2A2",
     grey: "#DCDCDD",
-    foreground: "#FAFAFA",
+    foreground: "white",
     background: "#E9E9E9",
     icon: "#3D3F62",
   },
