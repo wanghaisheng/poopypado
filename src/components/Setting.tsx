@@ -14,6 +14,9 @@ import { Icon } from "./Icon";
 import { Note } from "./Note";
 import { Page } from "./Page";
 import { PillButton } from "./PillButton";
+import styled from "styled-components/native";
+import { Spacer } from "./Spacer";
+
 import { TypeSelect } from "./TypeSelect";
 
 interface Props extends NativeStackScreenProps<RootStackParamList, "Setting"> {
@@ -97,12 +100,13 @@ export const Setting = (props: Props) => {
 
   return (
     <Page>
-      <ScrollView>
+      <ScrollView decelerationRate={0.95}>
         <DatePicker date={date} onChange={(d) => setDate(d)} />
         <TypeSelect type={type} onTypeSelect={setType} />
         <ColourSelect colour={colour} setColour={setColour} />
         <AmountSlider amount={amount} setAmount={setAmount} />
         <Note value={note} setValue={setNote} />
+        <Spacer size={"250"} />
 
         <ConfirmationModal
           visible={showConfirmModal}
@@ -113,11 +117,19 @@ export const Setting = (props: Props) => {
           }}
         />
       </ScrollView>
-      <Card>
+      <Footer>
         <PillButton onPress={confirm}>
           {hasExistingEntry ? "Edit" : "Create"} Entry
         </PillButton>
-      </Card>
+      </Footer>
     </Page>
   );
 };
+
+const Footer = styled.View`
+  position: absolute;
+  bottom: 0;
+  height: 20%;
+  right: 0;
+  width: 100%;
+`;
