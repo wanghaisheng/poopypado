@@ -58,7 +58,7 @@ export const getEntries = (
 ): void => {
   db.transaction((tx) => {
     tx.executeSql(
-      `SELECT * FROM items ORDER BY date(date) DESC;`,
+      `SELECT * FROM items ORDER BY date DESC;`,
       [],
       (_, { rows }) => {
         const entries = (rows as any)._array.map(
@@ -85,7 +85,7 @@ export const historyDateHash = (history: Poop[]): DateHash => {
     const entryExists = !!hash[date];
 
     if (entryExists) {
-      hash[date].push(h);
+      hash[date].unshift(h);
     } else {
       hash[date] = [h];
     }
