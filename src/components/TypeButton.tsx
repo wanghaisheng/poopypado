@@ -36,6 +36,8 @@ const Container = styled.View<{ selected: boolean }>`
   flex-direction: row;
   justify-content: space-between;
   padding: 6px 8px 10px 10px;
+  margin-bottom: 3px;
+  border-radius: 3px;
 `;
 
 export const TypeImage = styled.Image`

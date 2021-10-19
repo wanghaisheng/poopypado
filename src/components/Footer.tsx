@@ -11,11 +11,11 @@ interface Props {}
 export const Footer = (props: Props) => {
   return (
     <Container>
-      <HelpContainer>
-        <Pressable>
-          <AntDesign name="questioncircle" size={39} color={theme.color.icon} />
-        </Pressable>
-      </HelpContainer>
+      <IconContainer>
+        {/* <Pressable> */}
+        {/* <AntDesign name="questioncircle" size={39} color={theme.color.icon} /> */}
+        {/* </Pressable> */}
+      </IconContainer>
     </Container>
   );
 };
@@ -25,7 +25,7 @@ const Container = styled.View`
   background: ${(p) => p.theme.color.foreground};
 `;
 
-const HelpContainer = styled.View`
+const IconContainer = styled.View`
   position: absolute;
   right: 26px;
   top: 8px;

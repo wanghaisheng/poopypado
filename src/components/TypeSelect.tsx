@@ -57,8 +57,10 @@ export const TypeSelect = (props: Props) => {
   const { onTypeSelect, type } = props;
 
   return (
-    <Card>
-      <Text>Select Type(s)</Text>
+    <TypeCard>
+      <TextCard>
+        <Text>Select Type(s)</Text>
+      </TextCard>
       <ButtonContainer>
         {typeInfoArr.map((typeInfo, index) => (
           <TypeButton
@@ -75,9 +77,18 @@ export const TypeSelect = (props: Props) => {
           />
         ))}
       </ButtonContainer>
-    </Card>
+    </TypeCard>
   );
 };
+
+const TypeCard = styled(Card)`
+  padding-left: 12px;
+  padding-right: 12px;
+`;
+
+const TextCard = styled.View`
+  padding-left: 8px;
+`;
 
 const ButtonContainer = styled.View`
   margin: 10px 0 0 0;
