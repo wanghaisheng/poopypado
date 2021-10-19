@@ -1,5 +1,6 @@
 import { FontAwesome5 } from "@expo/vector-icons";
 import React from "react";
+import { Pressable } from "react-native";
 
 import { theme } from "./theme";
 
@@ -17,12 +18,12 @@ interface Props {
 export const Icon = (props: Props) => {
   const { name, onPress, disabled } = props;
   return (
-    <FontAwesome5
-      onPress={onPress}
-      disabled={disabled}
-      name={name}
-      size={24}
-      color={disabled ? theme.color.grey : theme.color.icon}
-    />
+    <Pressable onPress={onPress} disabled={disabled} hitSlop={12}>
+      <FontAwesome5
+        name={name}
+        size={24}
+        color={disabled ? theme.color.grey : theme.color.icon}
+      />
+    </Pressable>
   );
 };

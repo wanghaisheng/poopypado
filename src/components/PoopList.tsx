@@ -20,10 +20,10 @@ export const PoopList = (props: Props) => {
   const [index, setIndex] = useState(0);
   const hasManyEntries = history.length > 1;
 
-  const onLeft = () => {
+  const goPrevEntry = () => {
     setIndex(index === 0 ? history.length - 1 : index - 1);
   };
-  const onRight = () => {
+  const goNextEntry = () => {
     setIndex(index === history.length - 1 ? 0 : index + 1);
   };
 
@@ -32,15 +32,11 @@ export const PoopList = (props: Props) => {
       <Header>
         {hasManyEntries && (
           <Navigation>
-            <Pressable onPress={onLeft}>
-              <Icon name="angle-left" />
-            </Pressable>
+            <Icon onPress={goPrevEntry} name="angle-left" />
             <EntryText>
               Entry {index + 1}/{history.length}
             </EntryText>
-            <Pressable onPress={onRight}>
-              <Icon name="angle-right" />
-            </Pressable>
+            <Icon onPress={goNextEntry} name="angle-right" />
           </Navigation>
         )}
         <Close>
