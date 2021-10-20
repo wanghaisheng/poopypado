@@ -47,7 +47,9 @@ export const Main = (props: Props) => {
   return (
     <Page>
       <Header>
-        <MonthHeader date={visibleDate} />
+        <MonthContainer>
+          <MonthHeader date={visibleDate} />
+        </MonthContainer>
         <IconContainer>
           <Icon
             onPress={() => {
@@ -79,5 +81,12 @@ export const Main = (props: Props) => {
 };
 
 const IconContainer = styled.View`
-  padding-right: 16px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 0 24px 8px;
+`;
+
+const MonthContainer = styled.View`
+  padding: 0 0 5px;
 `;

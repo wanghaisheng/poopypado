@@ -21,7 +21,7 @@ export const Icon = (props: Props) => {
     <Pressable onPress={onPress} disabled={disabled} hitSlop={12}>
       <FontAwesome5
         name={name}
-        size={24}
+        size={23}
         color={disabled ? theme.color.grey : theme.color.icon}
       />
     </Pressable>

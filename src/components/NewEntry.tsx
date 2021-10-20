@@ -17,7 +17,7 @@ export const NewEntry = (props: Props) => {
       <InstructionContainer>
         <Intruction>
           <BoldText>Hint:</BoldText> Click on a date with an existing entry for
-          more information!
+          more information
         </Intruction>
       </InstructionContainer>
       <Spacer size="9" />

@@ -10,8 +10,7 @@ export const Header: FC<Props> = (props) => {
 
 const Container = styled.View`
   flex-flow: row;
-  align-items: baseline;
   justify-content: space-between;
-  padding: 48px 20px 17px;
-  background: white;
+  padding: 48px 20px 0px;
+  background: ${(p) => p.theme.color.foreground};
 `;

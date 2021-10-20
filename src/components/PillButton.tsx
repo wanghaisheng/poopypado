@@ -1,5 +1,6 @@
 import React, { FC } from "react";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, StyleSheet } from "react-native";
+
 import styled from "styled-components/native";
 
 interface Props {
@@ -10,7 +11,7 @@ export const PillButton: FC<Props> = (props) => {
   const { children, onPress } = props;
 
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={onPress} activeOpacity={0.5}>
       <Container>
         <Content>{children}</Content>
       </Container>
