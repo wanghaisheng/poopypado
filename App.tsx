@@ -8,6 +8,7 @@ import { Poop, initTable } from "./src/components/history";
 import { Main } from "./src/components/Main";
 import { Setting } from "./src/components/Setting";
 import { theme } from "./src/components/theme";
+import { useCustomFonts } from "./src/components/useCustomFonts";
 
 export type RootStackParamList = {
   Main?: {
@@ -26,6 +27,8 @@ export default function App() {
   useEffect(() => {
     initTable(db);
   }, []);
+
+  useCustomFonts();
 
   return (
     <ThemeProvider theme={theme}>
