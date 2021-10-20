@@ -2,6 +2,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { WebSQLDatabase } from "expo-sqlite";
 import React, { useEffect, useState } from "react";
 import { ScrollView } from "react-native";
+import styled from "styled-components/native";
 
 import { RootStackParamList } from "../../App";
 import { AmountSlider } from "./AmountSlider";
@@ -9,14 +10,14 @@ import { Card } from "./Card";
 import { ColourSelect } from "./ColourSelect";
 import { ConfirmationModal } from "./ConfirmationModal";
 import { DatePicker } from "./DatePicker";
+import { FontText } from "./FontText";
+import { Header } from "./Header";
 import { Poop, addEntry, editEntry } from "./history";
 import { Icon } from "./Icon";
 import { Note } from "./Note";
 import { Page } from "./Page";
 import { PillButton } from "./PillButton";
-import styled from "styled-components/native";
 import { Spacer } from "./Spacer";
-
 import { TypeSelect } from "./TypeSelect";
 
 interface Props extends NativeStackScreenProps<RootStackParamList, "Setting"> {
@@ -47,20 +48,6 @@ export const Setting = (props: Props) => {
 
   const [canExit, setCanExit] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-  useEffect(() => {
-    navigation.setOptions({
-      headerBackVisible: false,
-      headerRight: () => (
-        <Icon
-          name="times"
-          onPress={() => {
-            setCanExit(true);
-            setShowConfirmModal(true);
-          }}
-        />
-      ),
-    });
-  }, []);
 
   // Prevent default behavior of leaving the screen
   React.useEffect(
@@ -100,6 +87,16 @@ export const Setting = (props: Props) => {
 
   return (
     <Page>
+      <Header>
+        <Title>Setting</Title>
+        <Icon
+          name="times"
+          onPress={() => {
+            setCanExit(true);
+            setShowConfirmModal(true);
+          }}
+        />
+      </Header>
       <ScrollView decelerationRate={0.95}>
         <DatePicker date={date} onChange={(d) => setDate(d)} />
         <TypeSelect type={type} onTypeSelect={setType} />
@@ -125,6 +122,10 @@ export const Setting = (props: Props) => {
     </Page>
   );
 };
+
+const Title = styled(FontText)`
+  font-size: 25px;
+`;
 
 const Footer = styled.View`
   position: absolute;

@@ -9,6 +9,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo-google-fonts/roboto": "^0.2.0",
     "@react-native-community/datetimepicker": "3.5.2",
     "@react-native-community/slider": "^4.1.7",
     "@react-navigation/native": "^6.0.2",
@@ -16,6 +17,7 @@
     "date-fns": "^2.24.0",
     "expo": "~42.0.1",
     "expo-blur": "~9.0.3",
+    "expo-font": "~9.2.1",
     "expo-sqlite": "~9.2.1",
     "expo-status-bar": "~1.0.4",
     "react": "16.13.1",

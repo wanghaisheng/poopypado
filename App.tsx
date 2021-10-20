@@ -8,6 +8,7 @@ import { Poop, initTable } from "./src/components/history";
 import { Main } from "./src/components/Main";
 import { Setting } from "./src/components/Setting";
 import { theme } from "./src/components/theme";
+import { useCustomFonts } from "./src/components/useCustomFonts";
 
 export type RootStackParamList = {
   Main?: {
@@ -27,10 +28,15 @@ export default function App() {
     initTable(db);
   }, []);
 
+  useCustomFonts();
+
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Main">
+        <Stack.Navigator
+          initialRouteName="Main"
+          screenOptions={{ headerShown: false }}
+        >
           <Stack.Screen name="Main">
             {(props) => <Main {...props} db={db} />}
           </Stack.Screen>

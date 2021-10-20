@@ -55,7 +55,6 @@ export const Calendar = (props: Props) => {
           onVisibleMonthsChange={(months) => {
             const lastIndex = months.length - 1;
             onVisibleMonthChange(new Date(months[lastIndex].dateString));
-            console.log(months);
           }}
           firstDay={1}
           hideArrows
@@ -104,8 +103,8 @@ export const Calendar = (props: Props) => {
                 setSelectedDateHistory(null);
               }}
               onEdit={(entry) => {
-                setSelectedDateHistory(null);
                 onEdit(entry);
+                setSelectedDateHistory(null);
               }}
               onDelete={(id) => {
                 onDelete(id);
