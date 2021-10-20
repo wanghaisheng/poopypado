@@ -1,16 +1,17 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { WebSQLDatabase } from "expo-sqlite";
 import React, { useEffect, useState } from "react";
+import styled from "styled-components/native";
 
 import { RootStackParamList } from "../../App";
 import { Calendar } from "./Calendar";
+import { Footer } from "./Footer";
+import { Header } from "./Header";
 import { Poop, deleteEntry, getEntries } from "./history";
 import { Icon } from "./Icon";
 import { MonthHeader } from "./MonthHeader";
 import { NewEntry } from "./NewEntry";
 import { Page } from "./Page";
-import styled from "styled-components/native";
-import { Footer } from "./Footer";
 
 interface Props extends NativeStackScreenProps<RootStackParamList, "Main"> {
   db: WebSQLDatabase;
@@ -33,24 +34,6 @@ export const Main = (props: Props) => {
 
   const [calendarKey, setCalendarKey] = useState(1);
 
-  useEffect(() => {
-    navigation.setOptions({
-      headerTitle: () => <MonthHeader date={visibleDate} />,
-      headerRight: () => (
-        <IconContainer>
-          <Icon
-            onPress={() => {
-              setCalendarKey(calendarKey + 1);
-              setVisibleDate(new Date());
-            }}
-            name="calendar"
-            disabled={visibleDate.getMonth() === new Date().getMonth()}
-          />
-        </IconContainer>
-      ),
-    });
-  }, [visibleDate, calendarKey]);
-
   const goToSettingPage = () => {
     setCalendarKey(calendarKey + 1);
     setVisibleDate(new Date());
@@ -63,6 +46,20 @@ export const Main = (props: Props) => {
 
   return (
     <Page>
+      <Header>
+        <MonthHeader date={visibleDate} />
+        <IconContainer>
+          <Icon
+            onPress={() => {
+              setCalendarKey(calendarKey + 1);
+              setVisibleDate(new Date());
+            }}
+            name="calendar"
+            disabled={visibleDate.getMonth() === new Date().getMonth()}
+          />
+        </IconContainer>
+      </Header>
+
       <Calendar
         calendarKey={calendarKey}
         history={history}
