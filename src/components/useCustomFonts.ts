@@ -21,5 +21,5 @@ export const useCustomFonts = () => {
     Roboto_900Black,
   });
 
-  return fontsLoaded;
+  return [fontsLoaded];
 };

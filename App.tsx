@@ -28,7 +28,8 @@ export default function App() {
     initTable(db);
   }, []);
 
-  useCustomFonts();
+  const [fontsLoaded] = useCustomFonts();
+  if (!fontsLoaded) return null;
 
   return (
     <ThemeProvider theme={theme}>
