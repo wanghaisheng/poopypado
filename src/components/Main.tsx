@@ -84,7 +84,7 @@ const IconContainer = styled.View`
   position: absolute;
   bottom: 0;
   right: 0;
-  margin: 0 24px 8px;
+  margin: 0 40px 6px;
 `;
 
 const MonthContainer = styled.View`
