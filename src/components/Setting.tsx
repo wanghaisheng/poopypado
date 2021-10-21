@@ -89,7 +89,7 @@ export const Setting = (props: Props) => {
     <Page>
       <Header>
         <TitleContainer>
-          <Title>New Entry</Title>
+          <Title>{hasExistingEntry ? "Edit Existing" : "Create"} Entry</Title>
         </TitleContainer>
         <IconContainer>
           <Icon
@@ -120,7 +120,7 @@ export const Setting = (props: Props) => {
       </ScrollView>
       <Footer>
         <PillButton onPress={confirm}>
-          {hasExistingEntry ? "Edit" : "Create"} Entry
+          {hasExistingEntry ? "Update" : "Save"} Entry
         </PillButton>
       </Footer>
     </Page>
@@ -128,7 +128,7 @@ export const Setting = (props: Props) => {
 };
 
 const Title = styled(FontText)`
-  font-size: 24px;
+  font-size: 22px;
   color: ${(p) => p.theme.color.icon};
 `;
 
@@ -143,7 +143,7 @@ const Footer = styled.View`
 const IconContainer = styled.View`
   position: absolute;
   right: 30px;
-  top: 50px;
+  top: 52px;
 `;
 
 const TitleContainer = styled.View`
