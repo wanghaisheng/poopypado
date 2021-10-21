@@ -18,7 +18,9 @@ export const ConfirmationModal = (props: Props) => {
     <Modal visible={visible} transparent animationType="fade">
       <Overlay intensity={80} tint="dark">
         <ThickCard>
-          <Prompt>Exit without saving?</Prompt>
+          <PromptContainer>
+            <Prompt>Exit without saving?</Prompt>
+          </PromptContainer>
           <ButtonGroup>
             <SquareButton color="icon" onPress={onConfirm}>
               Yes
@@ -33,17 +35,21 @@ export const ConfirmationModal = (props: Props) => {
 
 const Overlay = styled(BlurView)`
   flex: 1;
-  padding-top: 50%;
+  padding-top: 55%;
 `;
 
 const ThickCard = styled(Card)`
-  padding: 80px 0;
-  margin: 0 25px;
+  padding: 48px 0;
+  margin: 0 28px;
   align-items: center;
 `;
 
+const PromptContainer = styled.View`
+  width: 85%;
+`;
+
 const Prompt = styled.Text`
-  font-size: 25px;
+  font-size: 20px;
   text-align: center;
   margin-bottom: 25px;
 `;
