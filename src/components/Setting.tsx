@@ -88,14 +88,18 @@ export const Setting = (props: Props) => {
   return (
     <Page>
       <Header>
-        <Title>Setting</Title>
-        <Icon
-          name="times"
-          onPress={() => {
-            setCanExit(true);
-            setShowConfirmModal(true);
-          }}
-        />
+        <TitleContainer>
+          <Title>New Entry</Title>
+        </TitleContainer>
+        <IconContainer>
+          <Icon
+            name="times"
+            onPress={() => {
+              setCanExit(true);
+              setShowConfirmModal(true);
+            }}
+          />
+        </IconContainer>
       </Header>
       <ScrollView decelerationRate={0.95}>
         <DatePicker date={date} onChange={(d) => setDate(d)} />
@@ -124,7 +128,8 @@ export const Setting = (props: Props) => {
 };
 
 const Title = styled(FontText)`
-  font-size: 25px;
+  font-size: 24px;
+  color: ${(p) => p.theme.color.icon};
 `;
 
 const Footer = styled.View`
@@ -133,4 +138,16 @@ const Footer = styled.View`
   height: 20%;
   right: 0;
   width: 100%;
+`;
+
+const IconContainer = styled.View`
+  position: absolute;
+  right: 30px;
+  top: 50px;
+`;
+
+const TitleContainer = styled.View`
+  position: absolute;
+  left: 30px;
+  bottom: 8px;
 `;

@@ -12,5 +12,6 @@ const Container = styled.View`
   flex-flow: row;
   justify-content: space-between;
   padding: 48px 20px 0px;
+  height: 85px;
   background: ${(p) => p.theme.color.foreground};
 `;

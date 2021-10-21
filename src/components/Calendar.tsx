@@ -15,6 +15,7 @@ import { Card } from "./Card";
 import { Poop, historyDateHash } from "./history";
 import { PoopList } from "./PoopList";
 import { theme } from "./theme";
+import { FontText } from "./FontText";
 
 interface Props {
   history: Poop[];
@@ -71,7 +72,9 @@ export const Calendar = (props: Props) => {
                 }}
               >
                 <DateContainer>
-                  <DayLabel>{date.day}</DayLabel>
+                  <DayLabel>
+                    <FontText weight={500}>{date.day}</FontText>
+                  </DayLabel>
                   <CountBubbleContainer>
                     <CountBubble
                       hasEntry={!!count}
@@ -132,7 +135,6 @@ const DateContainer = styled.View`
 const DayLabel = styled.Text`
   text-align: center;
   font-size: 11px;
-  font-weight: 700;
 `;
 
 const getDaySize = (p: { future: boolean; hasEntry: boolean }): string => {

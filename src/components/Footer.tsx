@@ -12,9 +12,9 @@ export const Footer = (props: Props) => {
   return (
     <Container>
       <IconContainer>
-        {/* <Pressable> */}
-        {/* <AntDesign name="questioncircle" size={39} color={theme.color.icon} /> */}
-        {/* </Pressable> */}
+        <Pressable>
+          <AntDesign name="questioncircle" size={39} color={theme.color.icon} />
+        </Pressable>
       </IconContainer>
     </Container>
   );

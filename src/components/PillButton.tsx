@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { TouchableOpacity, StyleSheet } from "react-native";
+import { FontText } from "./FontText";
 
 import styled from "styled-components/native";
 
@@ -13,7 +14,9 @@ export const PillButton: FC<Props> = (props) => {
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.5}>
       <Container>
-        <Content>{children}</Content>
+        <Content>
+          <FontText weight={400}>{children}</FontText>
+        </Content>
       </Container>
     </TouchableOpacity>
   );
@@ -21,7 +24,7 @@ export const PillButton: FC<Props> = (props) => {
 
 const Container = styled.View`
   background: ${(p) => p.theme.color.main};
-  padding: 12px 30px;
+  padding: 12px 27px;
   border-radius: 50px;
   align-self: center;
 `;
@@ -29,5 +32,5 @@ const Container = styled.View`
 const Content = styled.Text`
   text-align: center;
   font-size: 18px;
-  color: white;
+  color: ${(p) => p.theme.color.foreground};
 `;
