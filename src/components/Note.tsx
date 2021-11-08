@@ -19,7 +19,7 @@ export const Note = (props: Props) => {
         onChangeText={setValue}
         multiline
         textAlignVertical="top"
-        placeholder="How was your poop today?"
+        placeholder="Add description..."
       />
     </Card>
   );

@@ -4,6 +4,7 @@ import styled from "styled-components/native";
 import { Card } from "./Card";
 import { PillButton } from "./PillButton";
 import { Spacer } from "./Spacer";
+import { CalTypeSelection } from "./CalTypeSelection";
 
 interface Props {
   onNewEntryPress: () => void;
@@ -14,6 +15,7 @@ export const NewEntry = (props: Props) => {
 
   return (
     <Container>
+      <CalTypeSelection typeSelected={0} onSelect={() => {}} />
       <InstructionContainer>
         <Intruction>
           <BoldText>Hint:</BoldText> Click on a date with an existing entry for
@@ -21,6 +23,7 @@ export const NewEntry = (props: Props) => {
         </Intruction>
       </InstructionContainer>
       <Spacer size="9" />
+
       <PillButton onPress={onNewEntryPress}>New Entry</PillButton>
     </Container>
   );
