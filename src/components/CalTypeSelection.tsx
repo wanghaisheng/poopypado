@@ -71,5 +71,5 @@ const Content = styled.Text<{
 }>`
   font-size: 13px;
   color: ${(p) =>
-    p.typeSelected === p.index ? p.theme.color.foreground : "#7A7A7A"};
+    p.typeSelected === p.index ? p.theme.color.foreground : "#9F9F9F"};
 `;
