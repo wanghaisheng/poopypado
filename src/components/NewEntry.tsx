@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components/native";
 
 import { Card } from "./Card";
 import { PillButton } from "./PillButton";
 import { Spacer } from "./Spacer";
 import { CalTypeSelection } from "./CalTypeSelection";
+import { FontText } from "./FontText";
 
 interface Props {
   onNewEntryPress: () => void;
@@ -12,14 +13,16 @@ interface Props {
 
 export const NewEntry = (props: Props) => {
   const { onNewEntryPress } = props;
+  const [typeSelected, setType] = useState(0);
 
   return (
     <Container>
-      <CalTypeSelection typeSelected={0} onSelect={() => {}} />
+      <CalTypeSelection typeSelected={typeSelected} onSelect={setType} />
       <InstructionContainer>
         <Intruction>
-          <BoldText>Hint:</BoldText> Click on a date with an existing entry for
-          more information
+          <FontText weight={500}>
+            Click on a date with an existing entry for more information
+          </FontText>
         </Intruction>
       </InstructionContainer>
       <Spacer size="9" />
@@ -31,24 +34,19 @@ export const NewEntry = (props: Props) => {
 
 const InstructionContainer = styled.View`
   height: 65px;
-  width: 80%;
+  width: 90%;
+  padding-top: 10px;
 `;
 
 const Container = styled(Card)`
   flex: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
   margin: 12px 15px;
 `;
 
 const Intruction = styled.Text`
-  font-size: 15px;
-  margin-bottom: 8px;
-  text-align: center;
-  color: ${(p) => p.theme.color.icon};
-`;
-
-const BoldText = styled.Text`
-  font-weight: 700;
+  font-size: 14px;
+  text-align: left;
+  color: #7a7a7a;
 `;

@@ -1,10 +1,11 @@
 import React from "react";
 import { Text, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
+import { FontText } from "./FontText";
 
 interface Props {
   typeSelected: number;
-  onSelect: (type: boolean[]) => void;
+  onSelect: (typeSelected: number) => void;
 }
 
 export const typeOptions = [
@@ -20,19 +21,22 @@ export const typeOptions = [
 
 export const CalTypeSelection = (props: Props) => {
   const { typeSelected, onSelect } = props;
-  console.log(typeSelected);
 
   return (
     <Container>
-      <ScrollContent horizontal>
+      <ScrollContent horizontal showsHorizontalScrollIndicator={false}>
         {typeOptions.map((typeOption, index) => (
           <TouchableOpacity
             key={typeOption}
-            onPress={() => {}}
+            onPress={() => {
+              onSelect(index);
+            }}
             activeOpacity={0.5}
           >
             <ButtonContainer typeSelected={typeSelected} index={index}>
-              <Content>{typeOption}</Content>
+              <Content typeSelected={typeSelected} index={index}>
+                <FontText weight={500}>{typeOption}</FontText>
+              </Content>
             </ButtonContainer>
           </TouchableOpacity>
         ))}
@@ -47,21 +51,25 @@ const Container = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0 20px 0 20px;
+  margin: 0 15px;
 `;
 
 const ButtonContainer = styled.View<{
   typeSelected: number;
   index: number;
 }>`
-  background: ${(p) => (p.typeSelected === p.index ? "#CDCDCD" : "#ededed")};
+  background: ${(p) =>
+    p.typeSelected === p.index ? p.theme.color.icon : "#ededed"};
   padding: 5px 10px;
   border-radius: 50px;
-  margin-right: 6px;
-  margin-bottom: 6px;
+  margin-right: 3px;
 `;
 
-const Content = styled.Text`
-  font-size: 14px;
-  color: #626262;
+const Content = styled.Text<{
+  typeSelected: number;
+  index: number;
+}>`
+  font-size: 13px;
+  color: ${(p) =>
+    p.typeSelected === p.index ? p.theme.color.foreground : "#7A7A7A"};
 `;
