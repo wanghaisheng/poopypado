@@ -121,10 +121,9 @@ export const Calendar = (props: Props) => {
   );
 };
 
-const CalendarContainer = styled(Card)`
-  margin: 12px 15px 0 15px;
-  background: ${(p) => p.theme.color.foreground};
-  height: 390px;
+const CalendarContainer = styled.View`
+  margin: 0 5px 0 5px;
+  height: 350px;
 `;
 
 const DateContainer = styled.View`
@@ -138,7 +137,7 @@ const DayLabel = styled.Text`
 `;
 
 const getDaySize = (p: { future: boolean; hasEntry: boolean }): string => {
-  if (p.hasEntry) return "31px";
+  if (p.hasEntry) return "33px";
   if (p.future) return "10px";
   return "25px";
 };
@@ -167,7 +166,7 @@ const CountBubble = styled.View<{
 
     if (p.thisMonth) {
       if (p.hasEntry) return p.theme.color.main;
-      if (p.future) return "#ECB7B7";
+      if (p.future) return "#F9D9D9";
       return p.theme.color.emptyMain;
     } else {
       if (p.hasEntry) return "#7297CD";
@@ -192,8 +191,8 @@ const AbsoluteContainer = styled.View`
 `;
 
 const EntryContainer = styled.View`
-  width: 92%;
-  height: 92%;
+  width: 97%;
+  height: 96%;
 `;
 
 /**

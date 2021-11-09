@@ -3,7 +3,7 @@ import { DefaultTheme } from "styled-components/native";
 export const theme: DefaultTheme = {
   color: {
     main: "#E76262",
-    emptyMain: "#EAA2A2",
+    emptyMain: "#EFB7B7",
     grey: "#DCDCDD",
     foreground: "white",
     background: "#ECEEF0",

@@ -51,6 +51,7 @@ export const PoopList = (props: Props) => {
 
 const Container = styled(Card)`
   flex: 1;
+  background: #f5f5f5;
 `;
 
 const Header = styled.View``;

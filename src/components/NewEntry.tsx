@@ -16,7 +16,7 @@ interface Props {
 }
 
 export const typeDescription = [
-  "Click on a date with an existing entry for more information",
+  "Click on a Type Button or a date with an existing entry for more information",
   "Small, hard, separate lumps",
   "Sausage-shaped and lumpy",
   "Sausage-shaped with cracks over the surface",
@@ -39,7 +39,14 @@ export const NewEntry = (props: Props) => {
         </Intruction>
       </InstructionContainer>
       <Spacer size="9" />
-
+      <EntryInfo>
+        <Numerator>
+          <FontText weight={500}>37</FontText>
+        </Numerator>
+        <Denomenator>
+          <FontText weight={500}>Entries in the Last 30 Days</FontText>
+        </Denomenator>
+      </EntryInfo>
       <ButtContainer>
         <TouchableOpacity onPress={onNewEntryPress}>
           <AntDesign name="pluscircle" size={80} color={theme.color.main} />
@@ -49,21 +56,34 @@ export const NewEntry = (props: Props) => {
   );
 };
 
-const Blah = styled.Text``;
-
 const InstructionContainer = styled.View`
   height: 65px;
   width: 100%;
-  padding: 5px 15px;
+  padding: 8px 10px;
+`;
+
+const EntryInfo = styled.View`
+  position: absolute;
+  bottom: 18px;
+  left: 15px;
+  width: 100px;
+`;
+const Numerator = styled.Text`
+  font-size: 65px;
+  color: ${(p) => p.theme.color.icon};
+`;
+const Denomenator = styled.Text`
+  font-size: 16px;
+  color: ${(p) => p.theme.color.icon};
 `;
 
 const ButtContainer = styled.View`
   position: absolute;
-  bottom: 32px;
-  right: 35px;
+  bottom: 47px;
+  right: 15px;
 `;
 
-const Container = styled(Card)`
+const Container = styled.View`
   flex: 1;
   display: flex;
   margin: 12px 15px;

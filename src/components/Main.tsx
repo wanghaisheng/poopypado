@@ -2,6 +2,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { WebSQLDatabase } from "expo-sqlite";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
+import { Card } from "./Card";
 
 import { RootStackParamList } from "../../App";
 import { Calendar } from "./Calendar";
@@ -61,30 +62,38 @@ export const Main = (props: Props) => {
           />
         </IconContainer>
       </Header>
-
-      <Calendar
-        calendarKey={calendarKey}
-        history={history}
-        onVisibleMonthChange={setVisibleDate}
-        onEdit={editEntry}
-        onDelete={(id) => {
-          deleteEntry(db, id, () => {
-            const newHistory = history.filter((h) => h.id.toString() !== id);
-            setHistory(newHistory);
-          });
-        }}
-      />
-      <NewEntry onNewEntryPress={goToSettingPage} />
+      <MainContent>
+        <Calendar
+          calendarKey={calendarKey}
+          history={history}
+          onVisibleMonthChange={setVisibleDate}
+          onEdit={editEntry}
+          onDelete={(id) => {
+            deleteEntry(db, id, () => {
+              const newHistory = history.filter((h) => h.id.toString() !== id);
+              setHistory(newHistory);
+            });
+          }}
+        />
+        <NewEntry onNewEntryPress={goToSettingPage} />
+      </MainContent>
       <Footer />
     </Page>
   );
 };
+
+const MainContent = styled(Card)`
+  flex: 1;
+  display: flex;
+  margin-bottom: 12px;
+`;
 
 const IconContainer = styled.View`
   position: absolute;
   bottom: 0;
   right: 0;
   margin: 0 40px 6px;
+  padding-bottom: 5px;
 `;
 
 const MonthContainer = styled.View`

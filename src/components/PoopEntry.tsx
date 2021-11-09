@@ -154,7 +154,7 @@ const NoteContainer = styled.ScrollView`
   flex: 1 1 60px;
   padding: 12px;
   border-radius: 3px;
-  border: 1px solid black;
+  background: white;
 `;
 
 const ActionContainer = styled.View`

@@ -51,7 +51,7 @@ const Container = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0 15px;
+  margin: 0 8px;
 `;
 
 const ButtonContainer = styled.View<{
@@ -60,7 +60,7 @@ const ButtonContainer = styled.View<{
 }>`
   background: ${(p) =>
     p.typeSelected === p.index ? p.theme.color.icon : "#ededed"};
-  padding: 5px 10px;
+  padding: 7px 12px;
   border-radius: 50px;
   margin-right: 3px;
 `;
