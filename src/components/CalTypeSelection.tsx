@@ -5,7 +5,7 @@ import { FontText } from "./FontText";
 
 interface Props {
   typeSelected: number;
-  onSelect: (typeSelected: number) => void;
+  onTypeSelect: (typeSelected: number) => void;
 }
 
 export const typeOptions = [
@@ -20,7 +20,7 @@ export const typeOptions = [
 ];
 
 export const CalTypeSelection = (props: Props) => {
-  const { typeSelected, onSelect } = props;
+  const { typeSelected, onTypeSelect } = props;
 
   return (
     <Container>
@@ -29,7 +29,7 @@ export const CalTypeSelection = (props: Props) => {
           <TouchableOpacity
             key={typeOption}
             onPress={() => {
-              onSelect(index);
+              onTypeSelect(index);
             }}
             activeOpacity={0.5}
           >
@@ -45,13 +45,13 @@ export const CalTypeSelection = (props: Props) => {
   );
 };
 
-const ScrollContent = styled.ScrollView``;
-
 const Container = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 0 8px;
+  margin: 0 3px;
+`;
+const ScrollContent = styled.ScrollView`
+  height: 37px;
+  padding-top: 3px;
+  padding-left: 1px;
 `;
 
 const ButtonContainer = styled.View<{
@@ -60,9 +60,10 @@ const ButtonContainer = styled.View<{
 }>`
   background: ${(p) =>
     p.typeSelected === p.index ? p.theme.color.icon : "#ededed"};
-  padding: 7px 12px;
-  border-radius: 50px;
+  padding: 6px 12px;
+  border-radius: 60px;
   margin-right: 3px;
+  elevation: 2;
 `;
 
 const Content = styled.Text<{

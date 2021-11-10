@@ -20,7 +20,7 @@ interface Props extends NativeStackScreenProps<RootStackParamList, "Main"> {
 
 export const Main = (props: Props) => {
   const { navigation, route, db } = props;
-
+  const [typeSelected, setType] = useState(0);
   const [history, setHistory] = useState<Poop[]>([]);
 
   // Get history
@@ -66,6 +66,7 @@ export const Main = (props: Props) => {
         <Calendar
           calendarKey={calendarKey}
           history={history}
+          typeSelected={typeSelected}
           onVisibleMonthChange={setVisibleDate}
           onEdit={editEntry}
           onDelete={(id) => {
@@ -75,7 +76,11 @@ export const Main = (props: Props) => {
             });
           }}
         />
-        <NewEntry onNewEntryPress={goToSettingPage} />
+        <NewEntry
+          onNewEntryPress={goToSettingPage}
+          onTypeSelect={setType}
+          typeSelected={typeSelected}
+        />
       </MainContent>
       <Footer />
     </Page>
@@ -86,6 +91,7 @@ const MainContent = styled(Card)`
   flex: 1;
   display: flex;
   margin-bottom: 12px;
+  padding-right: 7px;
 `;
 
 const IconContainer = styled.View`

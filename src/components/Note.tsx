@@ -19,7 +19,7 @@ export const Note = (props: Props) => {
         onChangeText={setValue}
         multiline
         textAlignVertical="top"
-        placeholder="Add "
+        placeholder="Add Description"
       />
     </Card>
   );

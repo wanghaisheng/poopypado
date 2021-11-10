@@ -19,6 +19,7 @@ import { FontText } from "./FontText";
 
 interface Props {
   history: Poop[];
+  typeSelected: number;
   onVisibleMonthChange: (date: Date) => void;
   onEdit: (entry: Poop) => void;
   onDelete: (id: string) => void;
@@ -30,10 +31,16 @@ interface Props {
 }
 
 export const Calendar = (props: Props) => {
-  const { history, onVisibleMonthChange, onEdit, onDelete, calendarKey } =
-    props;
+  const {
+    history,
+    typeSelected,
+    onVisibleMonthChange,
+    onEdit,
+    onDelete,
+    calendarKey,
+  } = props;
 
-  const counts = historyToCounts(history);
+  const counts = historyToCounts(history, typeSelected);
 
   const dateHash = historyDateHash(history);
   const [selectedDateHistory, setSelectedDateHistory] = useState<Poop[] | null>(
@@ -122,7 +129,7 @@ export const Calendar = (props: Props) => {
 };
 
 const CalendarContainer = styled.View`
-  margin: 0 5px 0 5px;
+  margin: 0 3px 0 3px;
   height: 350px;
 `;
 
@@ -201,12 +208,16 @@ const EntryContainer = styled.View`
  */
 const DATE_STRING_FORMAT = "yyyy-MM-dd";
 
-const historyToCounts = (history: Poop[]): Record<string, number> => {
+const historyToCounts = (
+  history: Poop[],
+  typeSelected: number
+): Record<string, number> => {
   let counts: Record<string, number> = {};
   history.forEach((h) => {
     const date = format(h.date, DATE_STRING_FORMAT);
     if (counts[date] === undefined) counts[date] = 0;
-    counts[date] += 1;
+    if (typeSelected === 0) counts[date] += 1;
+    if (typeSelected && h.type[typeSelected - 1]) counts[date] += 1;
   });
   return counts;
 };

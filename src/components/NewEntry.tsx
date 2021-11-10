@@ -13,6 +13,8 @@ import { AntDesign } from "@expo/vector-icons";
 
 interface Props {
   onNewEntryPress: () => void;
+  typeSelected: number;
+  onTypeSelect: (typeSelected: number) => void;
 }
 
 export const typeDescription = [
@@ -27,12 +29,14 @@ export const typeDescription = [
 ];
 
 export const NewEntry = (props: Props) => {
-  const { onNewEntryPress } = props;
-  const [typeSelected, setType] = useState(0);
+  const { onNewEntryPress, onTypeSelect, typeSelected } = props;
 
   return (
     <Container>
-      <CalTypeSelection typeSelected={typeSelected} onSelect={setType} />
+      <CalTypeSelection
+        typeSelected={typeSelected}
+        onTypeSelect={onTypeSelect}
+      />
       <InstructionContainer>
         <Intruction>
           <FontText weight={500}>{typeDescription[typeSelected]}</FontText>
@@ -90,7 +94,7 @@ const Container = styled.View`
 `;
 
 const Intruction = styled.Text`
-  font-size: 14px;
+  font-size: 13px;
   text-align: left;
   color: #9f9f9f;
 `;
