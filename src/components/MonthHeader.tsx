@@ -26,7 +26,7 @@ const Container = styled.View`
   align-items: baseline;
   padding-left: 27px;
   position: absolute;
-  bottom: 0px;
+  bottom: 5px;
 `;
 
 const Month = styled.Text`
