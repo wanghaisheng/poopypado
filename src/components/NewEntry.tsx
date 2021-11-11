@@ -15,6 +15,7 @@ interface Props {
   onNewEntryPress: () => void;
   typeSelected: number;
   onTypeSelect: (typeSelected: number) => void;
+  entryCount: number;
 }
 
 export const typeDescription = [
@@ -29,7 +30,7 @@ export const typeDescription = [
 ];
 
 export const NewEntry = (props: Props) => {
-  const { onNewEntryPress, onTypeSelect, typeSelected } = props;
+  const { onNewEntryPress, onTypeSelect, typeSelected, entryCount } = props;
 
   return (
     <Container>
@@ -45,7 +46,7 @@ export const NewEntry = (props: Props) => {
       <Spacer size="9" />
       <EntryInfo>
         <Numerator>
-          <FontText weight={500}>37</FontText>
+          <FontText weight={500}>{entryCount}</FontText>
         </Numerator>
         <Denomenator>
           <FontText weight={500}>Entries in the Last 30 Days</FontText>
@@ -53,7 +54,7 @@ export const NewEntry = (props: Props) => {
       </EntryInfo>
       <ButtContainer>
         <TouchableOpacity onPress={onNewEntryPress}>
-          <AntDesign name="pluscircle" size={80} color={theme.color.main} />
+          <AntDesign name="pluscircle" size={77} color={theme.color.main} />
         </TouchableOpacity>
       </ButtContainer>
     </Container>
@@ -68,23 +69,29 @@ const InstructionContainer = styled.View`
 
 const EntryInfo = styled.View`
   position: absolute;
-  bottom: 18px;
-  left: 15px;
+  bottom: 10%;
+  left: 5%;
   width: 100px;
 `;
 const Numerator = styled.Text`
-  font-size: 65px;
+  font-size: 70px;
   color: ${(p) => p.theme.color.icon};
+  position: absolute;
+  bottom: 68%;
+  left: -5px;
 `;
 const Denomenator = styled.Text`
-  font-size: 16px;
+  font-size: 15px;
   color: ${(p) => p.theme.color.icon};
 `;
 
 const ButtContainer = styled.View`
   position: absolute;
-  bottom: 47px;
-  right: 15px;
+  bottom: 11%;
+  right: 7%;
+  elevation: 2;
+  border-radius: 50px;
+  background: ${(p) => p.theme.color.foreground};
 `;
 
 const Container = styled.View`

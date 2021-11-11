@@ -3,6 +3,7 @@ import { WebSQLDatabase } from "expo-sqlite";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import { Card } from "./Card";
+import { sub, format } from "date-fns";
 
 import { RootStackParamList } from "../../App";
 import { Calendar } from "./Calendar";
@@ -80,11 +81,36 @@ export const Main = (props: Props) => {
           onNewEntryPress={goToSettingPage}
           onTypeSelect={setType}
           typeSelected={typeSelected}
+          entryCount={entryAmountCount(history)}
         />
       </MainContent>
       <Footer />
     </Page>
   );
+};
+
+const DATE_STRING_FORMAT = "yyyyMMdd";
+
+const entryAmountCount = (history: Poop[]) => {
+  let entryCount = 0;
+
+  const endDate = sub(new Date(), {
+    days: 30,
+  });
+  const endDateString = format(endDate, DATE_STRING_FORMAT);
+
+  let i = 0;
+  while (history[i]) {
+    let checkDate = format(history[i].date, DATE_STRING_FORMAT);
+    if (checkDate < endDateString) {
+      console.log("checkDate", checkDate);
+      return entryCount;
+    } else {
+      entryCount++;
+      i++;
+    }
+  }
+  return entryCount;
 };
 
 const MainContent = styled(Card)`
@@ -96,10 +122,8 @@ const MainContent = styled(Card)`
 
 const IconContainer = styled.View`
   position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: 0 40px 6px;
-  padding-bottom: 5px;
+  bottom: 8px;
+  right: 40px;
 `;
 
 const MonthContainer = styled.View`

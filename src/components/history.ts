@@ -71,7 +71,7 @@ export const getEntries = (
             note: a.note,
           })
         );
-        console.log("entries: ", entries);
+        //console.log("entries: ", entries);
         onComplete(entries);
       }
     );
