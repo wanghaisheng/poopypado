@@ -11,6 +11,8 @@ export const Header: FC<Props> = (props) => {
 const Container = styled.View`
   flex-flow: row;
   justify-content: space-between;
+  align-items: baseline;
+
   padding: 48px 20px 0px;
   height: 90px;
   background: ${(p) => p.theme.color.foreground};
