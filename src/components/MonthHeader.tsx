@@ -30,11 +30,11 @@ const Container = styled.View`
 `;
 
 const Month = styled.Text`
-  font-size: 20px;
+  font-size: 21px;
   color: ${(p) => p.theme.color.icon};
 `;
 
 const Year = styled.Text`
-  font-size: 19px;
+  font-size: 20px;
   color: ${(p) => p.theme.color.icon};
 `;

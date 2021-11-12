@@ -84,7 +84,7 @@ export const Calendar = (props: Props) => {
                   </DayLabel>
                   <CountBubbleContainer>
                     <CountBubble
-                      hasEntry={!!count}
+                      hasEntry={count >= 0 ? true : false}
                       thisMonth={isThisYear(dayDate) && isThisMonth(dayDate)}
                       today={isToday(dayDate)}
                       future={isFuture(dayDate)}
@@ -98,7 +98,7 @@ export const Calendar = (props: Props) => {
           }}
           theme={{
             calendarBackground: theme.color.foreground,
-            textDayHeaderFontSize: 14,
+            textDayHeaderFontSize: 12,
           }}
           showScrollIndicator={false}
         />
@@ -134,17 +134,18 @@ const CalendarContainer = styled.View`
 `;
 
 const DateContainer = styled.View`
-  height: 45px;
+  height: 47px;
   width: 45px;
 `;
 
 const DayLabel = styled.Text`
   text-align: center;
   font-size: 11px;
+  color: ${(p) => p.theme.color.icon};
 `;
 
 const getDaySize = (p: { future: boolean; hasEntry: boolean }): string => {
-  if (p.hasEntry) return "33px";
+  if (p.hasEntry) return "32px";
   if (p.future) return "10px";
   return "25px";
 };
