@@ -4,6 +4,7 @@ import styled from "styled-components/native";
 
 import { Card } from "./Card";
 import { TypeButton } from "./TypeButton";
+import { SettingTextStyle } from "./SettingTextStyle";
 
 interface Props {
   type: boolean[];
@@ -59,7 +60,9 @@ export const TypeSelect = (props: Props) => {
   return (
     <TypeCard>
       <TextCard>
-        <Text>Select Type(s)</Text>
+        <Text>
+          <SettingTextStyle type="Instruction">Select Type(s)</SettingTextStyle>
+        </Text>
       </TextCard>
       <ButtonContainer>
         {typeInfoArr.map((typeInfo, index) => (

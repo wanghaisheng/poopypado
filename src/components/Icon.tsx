@@ -13,15 +13,16 @@ interface Props {
   name: string;
   onPress?: () => void;
   disabled?: boolean;
+  size: number;
 }
 
 export const Icon = (props: Props) => {
-  const { name, onPress, disabled } = props;
+  const { name, onPress, disabled, size } = props;
   return (
     <Pressable onPress={onPress} disabled={disabled} hitSlop={12}>
       <FontAwesome5
         name={name}
-        size={22}
+        size={size}
         color={disabled ? theme.color.grey : theme.color.icon}
       />
     </Pressable>

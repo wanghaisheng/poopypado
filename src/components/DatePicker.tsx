@@ -3,6 +3,7 @@ import format from "date-fns/format";
 import React, { useState } from "react";
 import { Platform, Text, TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
+import { SettingTextStyle } from "./SettingTextStyle";
 
 import { Card } from "./Card";
 
@@ -38,7 +39,9 @@ export const DatePicker = (props: Props) => {
 
   return (
     <Card>
-      <Text>Select a Time</Text>
+      <Text>
+        <SettingTextStyle type="Instruction">Select a Time</SettingTextStyle>
+      </Text>
       <DateTimeContainer>
         <View>
           <TouchableOpacity onPress={showDatepicker}>
@@ -66,6 +69,7 @@ export const DatePicker = (props: Props) => {
 
 const DateTimeText = styled.Text`
   font-size: 28px;
+  color: #373737;
 `;
 
 const DateTimeContainer = styled.View`

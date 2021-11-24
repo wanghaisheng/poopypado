@@ -2,6 +2,7 @@ import Slider from "@react-native-community/slider";
 import React from "react";
 import { Text } from "react-native";
 import styled from "styled-components/native";
+import { SettingTextStyle } from "./SettingTextStyle";
 
 import { Card } from "./Card";
 import { theme } from "./theme";
@@ -17,7 +18,9 @@ export const AmountSlider = (props: Props) => {
   const { amount, setAmount } = props;
   return (
     <Card>
-      <Text>Select an Amount</Text>
+      <Text>
+        <SettingTextStyle type="Instruction">Select an Amount</SettingTextStyle>
+      </Text>
       <Content>
         <Slider
           value={amount}
@@ -29,11 +32,21 @@ export const AmountSlider = (props: Props) => {
           thumbTintColor={theme.color.main}
         />
         <Labels>
-          <Text>XS</Text>
-          <Text>S</Text>
-          <Text>M</Text>
-          <Text>L</Text>
-          <Text>XL</Text>
+          <Text>
+            <SettingTextStyle type="AmountSliderText">XS</SettingTextStyle>
+          </Text>
+          <Text>
+            <SettingTextStyle type="AmountSliderText">S</SettingTextStyle>
+          </Text>
+          <Text>
+            <SettingTextStyle type="AmountSliderText">M</SettingTextStyle>
+          </Text>
+          <Text>
+            <SettingTextStyle type="AmountSliderText">L</SettingTextStyle>
+          </Text>
+          <Text>
+            <SettingTextStyle type="AmountSliderText">XL</SettingTextStyle>
+          </Text>
         </Labels>
       </Content>
     </Card>

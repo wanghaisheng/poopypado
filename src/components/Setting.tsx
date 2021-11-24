@@ -94,6 +94,7 @@ export const Setting = (props: Props) => {
         <IconContainer>
           <Icon
             name="times"
+            size={18}
             onPress={() => {
               setCanExit(true);
               setShowConfirmModal(true);

@@ -101,11 +101,13 @@ export const PoopEntry = (props: Props) => {
         <TrashIconContainer>
           <Icon
             name="trash-alt"
+            size={19}
             onPress={() => onDelete(entry.id.toString())}
           />
         </TrashIconContainer>
         <Icon
           name="edit"
+          size={19}
           onPress={() => {
             onEdit(entry);
           }}

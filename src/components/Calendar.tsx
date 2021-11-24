@@ -193,9 +193,10 @@ const Count = styled.Text`
 const AbsoluteContainer = styled.View`
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 135%;
   align-items: center;
   justify-content: center;
+  z-index: 999;
 `;
 
 const EntryContainer = styled.View`

@@ -3,6 +3,7 @@ import { ImageSourcePropType, TouchableOpacity } from "react-native";
 import { Text } from "react-native";
 import styled from "styled-components/native";
 import { Spacer } from "./Spacer";
+import { SettingTextStyle } from "./SettingTextStyle";
 
 interface Props {
   onPress: () => void;
@@ -18,9 +19,15 @@ export const TypeButton: FC<Props> = (props) => {
     <TouchableOpacity onPress={onPress}>
       <Container selected={selected}>
         <TextContainer>
-          <TypeName>{title}</TypeName>
+          <TypeName>
+            <SettingTextStyle type="Instruction">{title}</SettingTextStyle>
+          </TypeName>
           <Spacer size="2" />
-          <TypeDescription>{description}</TypeDescription>
+          <TypeDescription>
+            <SettingTextStyle type="TypeDescription">
+              {description}
+            </SettingTextStyle>
+          </TypeDescription>
         </TextContainer>
         <TypeImage source={imgSource} />
       </Container>

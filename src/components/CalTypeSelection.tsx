@@ -46,7 +46,7 @@ export const CalTypeSelection = (props: Props) => {
 };
 
 const Container = styled.View`
-  margin: 0 3px;
+  margin: 5px 3px 0 3px;
 `;
 const ScrollContent = styled.ScrollView`
   height: 37px;

@@ -59,6 +59,7 @@ export const Main = (props: Props) => {
               setVisibleDate(new Date());
             }}
             name="calendar"
+            size={21}
             disabled={visibleDate.getMonth() === new Date().getMonth()}
           />
         </IconContainer>

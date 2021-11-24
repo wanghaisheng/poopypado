@@ -1,6 +1,7 @@
 import React from "react";
 import { Text } from "react-native";
 import styled from "styled-components/native";
+import { SettingTextStyle } from "./SettingTextStyle";
 
 import { Card } from "./Card";
 import { ColourButton } from "./ColourButton";
@@ -24,7 +25,9 @@ export const ColourSelect = (props: Props) => {
 
   return (
     <Card>
-      <Text>Select Colour(s)</Text>
+      <Text>
+        <SettingTextStyle type="Instruction">Select Colour(s)</SettingTextStyle>
+      </Text>
       <Buttons>
         {poopColourArr.map((poopColour, index) => (
           <ColourButton

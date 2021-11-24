@@ -30,24 +30,32 @@ export const PoopList = (props: Props) => {
   return (
     <Container>
       <Header>
-        {hasManyEntries && (
-          <Navigation>
-            <Icon onPress={goPrevEntry} name="angle-left" />
-            <EntryText>
-              Entry {index + 1}/{history.length}
-            </EntryText>
-            <Icon onPress={goNextEntry} name="angle-right" />
-          </Navigation>
-        )}
-        <Close>
-          <Icon name="times" onPress={onClose} />
-        </Close>
+        <Navigation>
+          {hasManyEntries && (
+            <EntryInfoContainer>
+              <Icon onPress={goPrevEntry} name="angle-left" size={17} />
+              <EntryText>
+                {index + 1}/{history.length}
+              </EntryText>
+              <Icon onPress={goNextEntry} name="angle-right" size={17} />
+            </EntryInfoContainer>
+          )}
+          <Close>
+            <Icon name="times" onPress={onClose} size={17} />
+          </Close>
+        </Navigation>
       </Header>
       <Spacer size="24" />
       <PoopEntry entry={history[index]} onEdit={onEdit} onDelete={onDelete} />
     </Container>
   );
 };
+
+const EntryInfoContainer = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Container = styled(Card)`
   flex: 1;
@@ -61,6 +69,7 @@ const Navigation = styled.View`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  height: 17px;
 `;
 
 const EntryText = styled.Text`

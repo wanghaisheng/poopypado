@@ -1,6 +1,7 @@
 import React from "react";
 import { Text } from "react-native";
 import styled from "styled-components/native";
+import { SettingTextStyle } from "./SettingTextStyle";
 
 import { Card } from "./Card";
 
@@ -13,7 +14,10 @@ export const Note = (props: Props) => {
   const { value, setValue } = props;
   return (
     <Card>
-      <Text>Notes</Text>
+      <Text>
+        {" "}
+        <SettingTextStyle type="Instruction"> Notes</SettingTextStyle>
+      </Text>
       <TextArea
         value={value}
         onChangeText={setValue}
