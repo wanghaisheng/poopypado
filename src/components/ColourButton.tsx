@@ -25,8 +25,7 @@ const SelectedContainer = styled.View<{ selected: boolean }>`
   height: 52px;
   width: 52px;
   border-radius: 2px;
-  background: ${(p) =>
-    p.selected ? p.theme.color.background : p.theme.color.foreground};
+  background: ${(p) => (p.selected ? "#DFE4EA" : p.theme.color.foreground)};
   flex: 1;
   display: flex;
   align-items: center;

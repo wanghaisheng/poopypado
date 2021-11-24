@@ -36,8 +36,7 @@ export const TypeButton: FC<Props> = (props) => {
 };
 
 const Container = styled.View<{ selected: boolean }>`
-  background: ${(p) =>
-    p.selected ? p.theme.color.background : p.theme.color.foreground};
+  background: ${(p) => (p.selected ? "#E9EDF2" : p.theme.color.foreground)};
   height: 73px;
   display: flex;
   flex-direction: row;
