@@ -108,7 +108,7 @@ export const Setting = (props: Props) => {
         <ColourSelect colour={colour} setColour={setColour} />
         <AmountSlider amount={amount} setAmount={setAmount} />
         <Note value={note} setValue={setNote} />
-        <Spacer size={"60"} />
+        <Spacer size="60" />
 
         <ConfirmationModal
           visible={showConfirmModal}

@@ -44,6 +44,7 @@ export const PoopList = (props: Props) => {
             <Icon name="times" onPress={onClose} size={17} />
           </Close>
         </Navigation>
+        <Spacer size="24" />
       </Header>
       <Spacer size="24" />
       <PoopEntry entry={history[index]} onEdit={onEdit} onDelete={onDelete} />
@@ -59,6 +60,8 @@ const EntryInfoContainer = styled.View`
 
 const Container = styled(Card)`
   flex: 1;
+  margin: 0;
+  padding: 36px 24px 24px;
   background: #f4f4f4;
   elevation: 2;
 `;

@@ -1,12 +1,12 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { format, sub } from "date-fns";
 import { WebSQLDatabase } from "expo-sqlite";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
-import { Card } from "./Card";
-import { sub, format } from "date-fns";
 
 import { RootStackParamList } from "../../App";
 import { Calendar } from "./Calendar";
+import { Card } from "./Card";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { Poop, deleteEntry, getEntries } from "./history";
@@ -21,7 +21,6 @@ interface Props extends NativeStackScreenProps<RootStackParamList, "Main"> {
 
 export const Main = (props: Props) => {
   const { navigation, route, db } = props;
-  const [typeSelected, setType] = useState(0);
   const [history, setHistory] = useState<Poop[]>([]);
 
   // Get history
@@ -68,7 +67,6 @@ export const Main = (props: Props) => {
         <Calendar
           calendarKey={calendarKey}
           history={history}
-          typeSelected={typeSelected}
           onVisibleMonthChange={setVisibleDate}
           onEdit={editEntry}
           onDelete={(id) => {
@@ -80,8 +78,6 @@ export const Main = (props: Props) => {
         />
         <NewEntry
           onNewEntryPress={goToSettingPage}
-          onTypeSelect={setType}
-          typeSelected={typeSelected}
           entryCount={entryAmountCount(history)}
         />
       </MainContent>
@@ -118,7 +114,6 @@ const MainContent = styled(Card)`
   flex: 1;
   display: flex;
   margin-bottom: 12px;
-  padding-right: 7px;
 `;
 
 const IconContainer = styled.View`
