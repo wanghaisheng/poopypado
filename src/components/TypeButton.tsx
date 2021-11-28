@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import { ImageSourcePropType, TouchableOpacity } from "react-native";
-import { Text } from "react-native";
 import styled from "styled-components/native";
-import { Spacer } from "./Spacer";
+
 import { SettingTextStyle } from "./SettingTextStyle";
+import { Spacer } from "./Spacer";
 
 interface Props {
   onPress: () => void;

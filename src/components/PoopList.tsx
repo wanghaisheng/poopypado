@@ -44,7 +44,6 @@ export const PoopList = (props: Props) => {
             <Icon name="times" onPress={onClose} size={17} />
           </Close>
         </Navigation>
-        <Spacer size="24" />
       </Header>
       <Spacer size="24" />
       <PoopEntry entry={history[index]} onEdit={onEdit} onDelete={onDelete} />
