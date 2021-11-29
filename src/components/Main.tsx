@@ -99,7 +99,6 @@ const entryAmountCount = (history: Poop[]) => {
   while (history[i]) {
     let checkDate = format(history[i].date, DATE_STRING_FORMAT);
     if (checkDate < endDateString) {
-      console.log("checkDate", checkDate);
       return entryCount;
     } else {
       entryCount++;
