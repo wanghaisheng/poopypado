@@ -21,43 +21,45 @@ interface Props {
 export const PoopEntry = (props: Props) => {
   const { entry, onEdit, onDelete } = props;
 
-  const hasTypeEntry = entry.type?.filter((t) => t).length || 0 !== 0;
   const hasColorEntry = entry.color?.filter((t) => t).length || 0 !== 0;
 
   return (
     <Container>
       <InfoContainer>
         <InfoRow>
-          <Label>Time: </Label>
-          <Text>{format(entry.date, "dd MMM yyyy, h:mm a")}</Text>
+          <FixedEntry>
+            <Label>{format(entry.date, "dd MMM yyyy")}</Label>
+            <TextInfo>{format(entry.date, "h:mm")}</TextInfo>
+            <TextInfo>{format(entry.date, "a")}</TextInfo>
+          </FixedEntry>
+          <Entry>
+            <Label>Type</Label>
+            <Row>
+              {entry.type.map((selected, i) => {
+                const typeInfo = typeInfoArr[i];
+                return (
+                  <TypeImageStyled
+                    key={typeInfo.title}
+                    source={typeInfo.imgSource}
+                    selected={selected}
+                  />
+                );
+              })}
+            </Row>
+          </Entry>
         </InfoRow>
 
-        {hasTypeEntry && (
-          <>
-            <Spacer size="8" />
-            <InfoRow>
-              <Label>Type: </Label>
-              <Row>
-                {entry.type.map((selected, i) => {
-                  if (!selected) return undefined;
-                  const typeInfo = typeInfoArr[i];
-                  return (
-                    <TypeImageStyled
-                      key={typeInfo.title}
-                      source={typeInfo.imgSource}
-                    />
-                  );
-                })}
-              </Row>
-            </InfoRow>
-          </>
-        )}
+        <Spacer size="6" />
 
-        {hasColorEntry && (
-          <>
-            <Spacer size="8" />
-            <InfoRow>
-              <Label>Color: </Label>
+        <InfoRow>
+          <FixedEntry>
+            <Label>Amount</Label>
+            <TextInfo>{amountSizes[entry.amount - 1]}</TextInfo>
+          </FixedEntry>
+
+          {hasColorEntry && (
+            <Entry>
+              <Label>Colour</Label>
               <Row>
                 {entry.color.map((selected, i) => {
                   if (!selected) return undefined;
@@ -70,31 +72,21 @@ export const PoopEntry = (props: Props) => {
                   );
                 })}
               </Row>
-            </InfoRow>
-          </>
-        )}
+            </Entry>
+          )}
+        </InfoRow>
 
-        {entry.amount && (
-          <>
-            <Spacer size="8" />
-            <InfoRow>
-              <Label>Amount: </Label>
-              <Text>{amountSizes[entry.amount - 1]}</Text>
-            </InfoRow>
-          </>
-        )}
-
-        {entry.note ? (
-          <>
-            <Spacer size="8" />
-            <NoteContainer>
-              {entry.note.split("\n").map((line, i) => (
-                <Text key={i}>{line}</Text>
-              ))}
-            </NoteContainer>
-          </>
-        ) : undefined}
         <Spacer size="12" />
+
+        <Entry>
+          <Label>Notes</Label>
+          <NoteContainer>
+            {entry.note.split("\n").map((line, i) => (
+              <Text key={i}>{line}</Text>
+            ))}
+          </NoteContainer>
+          <Spacer size="12" />
+        </Entry>
       </InfoContainer>
 
       <ActionContainer>
@@ -129,10 +121,22 @@ const InfoRow = styled.View`
   flex-direction: row;
 `;
 
+const FixedEntry = styled.View`
+  width: 84px;
+`;
+
+const Entry = styled.View`
+  flex-shrink: 1;
+  flex-grow: 1;
+`;
+
 const Label = styled.Text`
-  font-weight: 700;
-  width: 60px;
-  margin-right: 8px;
+  font-size: 12px;
+  margin-bottom: 8px;
+`;
+
+const TextInfo = styled.Text`
+  font-size: 25px;
 `;
 
 const Row = styled.View`
@@ -140,16 +144,19 @@ const Row = styled.View`
   flex-wrap: wrap;
 `;
 
-const TypeImageStyled = styled(TypeImage)`
+const TypeImageStyled = styled(TypeImage)<{ selected: boolean }>`
   margin-right: 4px;
-  width: 30px;
-  height: 30px;
+  margin-bottom: 4px;
+  width: 40px;
+  height: 40px;
+  opacity: ${(p) => (p.selected ? 1 : 0.2)};
 `;
 
 const ColorBoxStyled = styled(ColorBox)`
   margin-right: 4px;
-  height: 30px;
-  width: 30px;
+  margin-bottom: 4px;
+  height: 40px;
+  width: 40px;
 `;
 
 const NoteContainer = styled.ScrollView`

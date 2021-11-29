@@ -59,6 +59,8 @@ const EntryInfoContainer = styled.View`
 
 const Container = styled(Card)`
   flex: 1;
+  margin: 0;
+  padding: 36px 24px 24px;
   background: #f4f4f4;
   elevation: 2;
 `;

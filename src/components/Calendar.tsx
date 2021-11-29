@@ -11,15 +11,15 @@ import { Pressable, Text, View } from "react-native";
 import { CalendarList } from "react-native-calendars";
 import styled from "styled-components/native";
 
-import { Card } from "./Card";
+import { CalTypeSelection } from "./CalTypeSelection";
+import { FontText } from "./FontText";
 import { Poop, historyDateHash } from "./history";
 import { PoopList } from "./PoopList";
+import { Spacer } from "./Spacer";
 import { theme } from "./theme";
-import { FontText } from "./FontText";
 
 interface Props {
   history: Poop[];
-  typeSelected: number;
   onVisibleMonthChange: (date: Date) => void;
   onEdit: (entry: Poop) => void;
   onDelete: (id: string) => void;
@@ -30,15 +30,22 @@ interface Props {
   calendarKey: number;
 }
 
+const typeDescription = [
+  "Click on a Type Button or a date with an existing entry for more information",
+  "Small, hard, separate lumps",
+  "Sausage-shaped and lumpy",
+  "Sausage-shaped with cracks over the surface",
+  "Smooth and soft, Sausage-shaped",
+  "Small and soft blobs with defined edges",
+  "Fluffy/mushy pieces with ragged edges",
+  "Watery consistency with no solid pieces",
+];
+
 export const Calendar = (props: Props) => {
-  const {
-    history,
-    typeSelected,
-    onVisibleMonthChange,
-    onEdit,
-    onDelete,
-    calendarKey,
-  } = props;
+  const { history, onVisibleMonthChange, onEdit, onDelete, calendarKey } =
+    props;
+
+  const [typeSelected, setTypeSelected] = useState(0);
 
   const counts = historyToCounts(history, typeSelected);
 
@@ -103,6 +110,18 @@ export const Calendar = (props: Props) => {
           showScrollIndicator={false}
         />
       </CalendarContainer>
+
+      <Spacer size="12" />
+
+      <CalTypeSelection
+        typeSelected={typeSelected}
+        onTypeSelect={setTypeSelected}
+      />
+      <InstructionContainer>
+        <Intruction>
+          <FontText weight={500}>{typeDescription[typeSelected]}</FontText>
+        </Intruction>
+      </InstructionContainer>
 
       {selectedDateHistory && (
         <AbsoluteContainer>
@@ -193,15 +212,15 @@ const Count = styled.Text`
 const AbsoluteContainer = styled.View`
   position: absolute;
   width: 100%;
-  height: 135%;
+  height: 100%;
   align-items: center;
   justify-content: center;
   z-index: 999;
 `;
 
 const EntryContainer = styled.View`
-  width: 97%;
-  height: 96%;
+  width: 100%;
+  height: 100%;
 `;
 
 /**
@@ -223,3 +242,15 @@ const historyToCounts = (
   });
   return counts;
 };
+
+const InstructionContainer = styled.View`
+  height: 65px;
+  width: 100%;
+  padding: 8px 10px;
+`;
+
+const Intruction = styled.Text`
+  font-size: 13px;
+  text-align: left;
+  color: #9f9f9f;
+`;
