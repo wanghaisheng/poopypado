@@ -81,7 +81,6 @@ export const Main = (props: Props) => {
           entryCount={entryAmountCount(history)}
         />
       </MainContent>
-      <Footer />
     </Page>
   );
 };
@@ -114,6 +113,7 @@ const MainContent = styled(Card)`
   flex: 1;
   display: flex;
   margin-bottom: 12px;
+  padding-bottom: 36px;
 `;
 
 const IconContainer = styled.View`
