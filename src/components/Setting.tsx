@@ -135,10 +135,10 @@ const Title = styled(FontText)`
 
 const Footer = styled.View`
   position: absolute;
-  bottom: 0;
-  height: 10%;
-  right: 0;
   width: 100%;
+  bottom: 24px;
+  right: 0;
+  align-items: center;
 `;
 
 const IconContainer = styled.View`

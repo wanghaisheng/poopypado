@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import { TouchableOpacity, StyleSheet } from "react-native";
-import { FontText } from "./FontText";
-
+import { StyleSheet, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
+
+import { FontText } from "./FontText";
 
 interface Props {
   onPress: () => void;
